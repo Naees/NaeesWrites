@@ -1,0 +1,67 @@
+---
+import { getCollection } from 'astro:content'
+import { slugify } from '../../lib/utils'
+import Layout from '../../components/Layout.astro'
+import DarkModeToggle from '../../components/DarkModeToggle.astro'
+import GiscusComments from '../../components/GiscusComments.astro'
+
+export async function getStaticPaths() {
+  const posts = await getCollection('posts')
+  return posts.map(post => ({
+    params: { slug: post.id },
+  }))
+}
+
+const { slug } = Astro.params
+const allPosts = await getCollection('posts')
+const postEntry = allPosts.find(p => p.id === slug)
+const post = postEntry?.data
+const body = postEntry?.body
+
+if (!post) {
+  throw new Error('Post not found: ' + slug)
+}
+---
+
+<Layout
+  title={post.title + ' — NaeesWrites'}
+  description={post.description}
+  pathname={'/posts/' + slug + '/'}
+  publishedTime={post.date.toISOString()}
+  type="article"
+>
+  <div slot="darkModeToggle"><DarkModeToggle /></div>
+
+  <div class="container">
+    <article>
+      <header style="margin-bottom: 2.5rem;">
+        <time style="color: var(--text-secondary); font-size: 0.875rem; display: block; margin-bottom: 0.75rem;">
+          {post.date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+        </time>
+        <h1 style="margin-top: 0; font-size: 2.5rem; letter-spacing: -0.03em;">{post.title}</h1>
+        {post.tags && post.tags.length > 0 && (
+          <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 1rem;">
+            {post.tags.map(tag => (
+              <a
+                href={'/tags/' + slugify(tag) + '/'}
+                style="display: inline-block; padding: 0.25rem 0.75rem; font-size: 0.8rem; border: 1px solid var(--border); border-radius: 999px; text-decoration: none; color: var(--text-secondary); transition: all 0.15s ease;"
+              >
+                {tag}
+              </a>
+            ))}
+          </div>
+        )}
+      </header>
+
+      <div style="font-size: 1.05rem; line-height: 1.8;">
+        {body}
+      </div>
+    </article>
+
+    <hr />
+
+    <div style="margin-top: 2rem;">
+      <GiscusComments currentSlug={slug} />
+    </div>
+  </div>
+</Layout>

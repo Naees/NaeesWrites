@@ -1,0 +1,37 @@
+---
+import { getCollection } from 'astro:content'
+import { getAllTags, getTagCount } from '../lib/utils'
+import Tag from '../components/Tag.astro'
+import Layout from '../components/Layout.astro'
+import DarkModeToggle from '../components/DarkModeToggle.astro'
+
+const posts = (await getCollection('posts'))
+  .filter(post => !post.data.draft)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+
+const allTags = getAllTags(posts)
+const tagCounts = getTagCount(posts)
+---
+
+<Layout
+  title="Tags — NaeesWrites"
+  description="Browse posts by tag."
+  pathname="/tags/"
+>
+  <div slot="darkModeToggle"><DarkModeToggle /></div>
+
+  <div class="container">
+    <div style="margin-bottom: 3rem;">
+      <h1 style="margin-top: 0;">Tags</h1>
+      <p style="color: var(--text-secondary); max-width: 540px;">
+        Browse posts by topic.
+      </p>
+    </div>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+      {allTags.map(tag => (
+        <Tag label={tag} count={tagCounts.get(tag)} />
+      ))}
+    </div>
+  </div>
+</Layout>

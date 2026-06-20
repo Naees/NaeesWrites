@@ -1,0 +1,43 @@
+---
+interface Props {
+  currentSlug: string;
+}
+
+const { currentSlug } = Astro.props
+
+const repo = 'Naees/NaeesWrites'
+const repoId = 'R_kgDONaees'
+const category = 'Blog Comments'
+const categoryId = 'DIC_kwDONaees'
+---
+
+<script is:inline>
+  function loadGiscus() {
+    const theme = localStorage.getItem('theme') || 'preferred'
+    const s = document.createElement('script')
+    s.src = 'https://giscus.app/client.js'
+    s.setAttribute('data-repo', repo)
+    s.setAttribute('data-repo-id', repoId)
+    s.setAttribute('data-category', category)
+    s.setAttribute('data-category-id', categoryId)
+    s.setAttribute('data-mapping', 'pathname')
+    s.setAttribute('data-term', currentSlug)
+    s.setAttribute('data-strict', '0')
+    s.setAttribute('data-reactions-enabled', '1')
+    s.setAttribute('data-emit-metadata', '0')
+    s.setAttribute('data-input-position', 'bottom')
+    s.setAttribute('data-theme', theme)
+    s.setAttribute('data-lang', 'en')
+    s.setAttribute('crossorigin', 'anonymous')
+    s.async = true
+    document.getElementById('giscus-container')!.appendChild(s)
+  }
+  loadGiscus()
+
+  const toggle = document.getElementById('dark-mode-toggle')
+  if (toggle) {
+    toggle.addEventListener('click', () => {
+      setTimeout(loadGiscus, 100)
+    })
+  }
+</script>

@@ -1,0 +1,64 @@
+---
+import Layout from '../components/Layout.astro'
+import DarkModeToggle from '../components/DarkModeToggle.astro'
+---
+
+<Layout
+  title="About — NaeesWrites"
+  description="About Naees, the author behind NaeesWrites."
+  pathname="/about/"
+>
+  <div slot="darkModeToggle"><DarkModeToggle /></div>
+
+  <div class="container">
+    <div style="margin-bottom: 2rem;">
+      <h1 style="margin-top: 0;">About</h1>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 3rem; align-items: start;">
+      <div>
+        <div style="width: 100%; aspect-ratio: 1; background-color: var(--bg-secondary); border-radius: 12px; display: flex; align-items: center; justify-content: center; overflow: hidden;">
+          <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="var(--text-secondary)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+            <circle cx="12" cy="7" r="4" />
+          </svg>
+        </div>
+      </div>
+
+      <div>
+        <p>
+          Hi, I'm Naees. I write about things I find interesting — technology, design,
+          philosophy, and everything in between.
+        </p>
+        <p>
+          This blog is a space for me to think out loud, share ideas, and document
+          what I learn along the way. I believe in the power of writing to clarify
+          thought and connect with others.
+        </p>
+        <p>
+          When I'm not writing, you can find me exploring new technologies,
+          reading, or working on side projects.
+        </p>
+
+        <h2 style="margin-top: 2rem;">Connect</h2>
+        <ul style="list-style: none; padding: 0;">
+          <li style="margin-bottom: 0.5rem;">
+            <a href="https://github.com/Naees">GitHub</a>
+          </li>
+          <li style="margin-bottom: 0.5rem;">
+            <a href="https://twitter.com/Naees">Twitter</a>
+          </li>
+          <li style="margin-bottom: 0.5rem;">
+            <a href="https://linkedin.com/in/Naees">LinkedIn</a>
+          </li>
+        </ul>
+
+        <h2 style="margin-top: 2rem;">Tech Stack</h2>
+        <p style="color: var(--text-secondary);">
+          This site is built with Astro, deployed on GitHub Pages, and uses
+          giscus for comments. Content is written in Markdown and stored in git.
+        </p>
+      </div>
+    </div>
+  </div>
+</Layout>

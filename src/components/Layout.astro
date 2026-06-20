@@ -1,0 +1,42 @@
+---
+import SeoHead from './SeoHead.astro'
+import Header from './Header.astro'
+import Footer from './Footer.astro'
+
+interface Props {
+  title: string;
+  description: string;
+  pathname: string;
+  publishedTime?: string;
+  type?: 'website' | 'article';
+}
+
+const { title, description, pathname, publishedTime, type = 'website' } = Astro.props
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="color-scheme" content="light dark" />
+    <SeoHead title={title} description={description} pathname={pathname} publishedTime={publishedTime} type={type} />
+    <link rel="stylesheet" href="/styles/global.css" />
+  </head>
+  <body>
+    <Header currentPage={pathname}>
+      <slot name="darkModeToggle" slot="darkModeToggle" />
+    </Header>
+    <main style="min-height: 60vh;">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>
+
+<style is:global>
+  @import '../styles/global.css';
+</style>

@@ -1,0 +1,17 @@
+---
+interface Props {
+  label: string;
+  count?: number;
+}
+
+const { label, count } = Astro.props
+---
+
+<a
+  href={'/tags/' + label + '/'}
+  style="display: inline-block; padding: 0.25rem 0.75rem; font-size: 0.8rem; border: 1px solid var(--border); border-radius: 999px; text-decoration: none; color: var(--text-secondary); transition: all 0.15s ease;"
+  class="tag-link"
+>
+  {label}
+  {count !== undefined ? <span style="margin-left: 0.35rem; opacity: 0.6;">{count}</span> : null}
+</a>

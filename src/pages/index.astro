@@ -1,0 +1,66 @@
+---
+import { getCollection } from 'astro:content'
+import Layout from '../components/Layout.astro'
+import PostCard from '../components/PostCard.astro'
+import DarkModeToggle from '../components/DarkModeToggle.astro'
+
+const posts = (await getCollection('posts'))
+  .filter(post => !post.data.draft)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+---
+
+<Layout
+  title="NaeesWrites — Home"
+  description="A collection of thoughts, ideas, and writing by Naees."
+  pathname="/"
+>
+  <div slot="darkModeToggle"><DarkModeToggle /></div>
+
+  <div class="container">
+    <div style="margin-bottom: 3rem;">
+      <h1 style="margin-top: 0;">Welcome.</h1>
+      <p style="color: var(--text-secondary); font-size: 1.125rem; max-width: 540px;">
+        A collection of thoughts, ideas, and writing.
+      </p>
+    </div>
+
+    <div style="margin-bottom: 2rem;">
+      <input
+        type="text"
+        id="search-input"
+        placeholder="Search posts..."
+        style="width: 100%; padding: 0.75rem 1rem; font-size: 1rem; border: 1px solid var(--border); border-radius: 8px; background-color: var(--bg); color: var(--text); font-family: var(--font-sans); outline: none; transition: border-color 0.15s ease;"
+        onfocus="this.style.borderColor='var(--accent)'"
+        onblur="this.style.borderColor='var(--border)'"
+      />
+    </div>
+
+    <div id="posts-list">
+      {posts.map(post => (
+        <PostCard
+          title={post.data.title}
+          date={post.data.date}
+          description={post.data.description}
+          tags={post.data.tags || []}
+          slug={post.id}
+        />
+      ))}
+    </div>
+  </div>
+
+  <script>
+    const searchInput = document.getElementById('search-input')
+    const postsList = document.getElementById('posts-list')
+    const articles = postsList.querySelectorAll('article')
+
+    searchInput?.addEventListener('input', (e) => {
+      const query = e.target.value.toLowerCase()
+      articles.forEach(article => {
+        const title = article.querySelector('h2')?.textContent?.toLowerCase() || ''
+        const description = article.querySelector('p')?.textContent?.toLowerCase() || ''
+        const match = title.includes(query) || description.includes(query)
+        article.style.display = match || query === '' ? '' : 'none'
+      })
+    })
+  </script>
+</Layout>

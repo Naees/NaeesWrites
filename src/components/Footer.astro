@@ -3,9 +3,31 @@ const currentYear = new Date().getFullYear()
 ---
 
 <footer style="padding: 3rem 0; border-top: 1px solid var(--border); margin-top: 4rem;">
-  <div class="container" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
-    <p style="color: var(--text-secondary); font-size: 0.875rem;">
-      &copy; {currentYear} NaeesWrites. All rights reserved.
-    </p>
+  <div class="container">
+    <div style="font-family: var(--font-mono); font-size: 0.8rem; line-height: 1.8; color: var(--text-secondary);">
+      <div style="margin-bottom: 0.5rem;">
+        <span style="color: var(--accent);">$</span> whoami
+      </div>
+      <div style="margin-bottom: 1rem; padding-left: 1rem; border-left: 1px solid var(--border);">
+        naees — security researcher &amp; writer
+      </div>
+      <div style="margin-bottom: 1rem;">
+        <span style="color: var(--accent);">$</span> ls ~/projects/
+      </div>
+      <nav style="padding-left: 1rem; margin-bottom: 1.5rem; display: flex; gap: 1.25rem; flex-wrap: wrap;">
+        <a href="/about" style="text-decoration: none; color: var(--text-secondary); font-family: var(--font-mono); font-size: 0.8rem;">
+          <span style="color: var(--accent);">→</span> about
+        </a>
+        <a href="https://github.com/Naees" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: var(--text-secondary); font-family: var(--font-mono); font-size: 0.8rem;">
+          <span style="color: var(--accent);">→</span> github
+        </a>
+        <a href="/tags" style="text-decoration: none; color: var(--text-secondary); font-family: var(--font-mono); font-size: 0.8rem;">
+          <span style="color: var(--accent);">→</span> tags
+        </a>
+      </nav>
+      <div style="padding-left: 1rem; border-top: 1px solid var(--border); padding-top: 0.75rem; margin-top: 0.5rem;">
+        <span style="color: var(--accent);">$</span> echo &copy; {currentYear} naees
+      </div>
+    </div>
   </div>
 </footer>

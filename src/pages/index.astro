@@ -17,15 +17,17 @@ const posts = (await getCollection('posts'))
 
   <!-- Hero -->
   <div class="hero" style="margin-bottom: 3rem;">
-    <h1 style="margin-top: 0;">NaeesWrites</h1>
+    <h1 style="margin-top: 0;">NaeesWrites<span class="eye-dot"></span></h1>
     <p>A collection of thoughts, ideas, and writing.</p>
   </div>
 
   <div class="divider" aria-hidden="true">~~~</div>
 
   <!-- Terminal prompt: ls -->
-  <div class="prompt" style="margin-bottom: 1.5rem;">
-    <span class="dollar">$</span> naees@writes:~/blog$ ls -la posts/
+  <div style="margin-bottom: 1.5rem;">
+    <div class="prompt typing-line" style="margin-bottom: 0.5rem;">
+      <span class="dollar">$</span> naees@writes:~/blog$ ls -la posts/<span class="cursor-blink">█</span>
+    </div>
   </div>
 
   <!-- Search -->
@@ -48,13 +50,6 @@ const posts = (await getCollection('posts'))
           <span class="post-date">{post.data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}</span>
           <div class="post-title">{post.data.title}</div>
           <p class="post-desc">{post.data.description}</p>
-          {post.data.tags && post.data.tags.length > 0 && (
-            <div class="post-tags">
-              {post.data.tags.map((tag, i) => (
-                <span>{tag}{i < post.data.tags!.length - 1 ? ' ' : ''}</span>
-              ))}
-            </div>
-          )}
         </a>
       </div>
     ))}
@@ -75,6 +70,14 @@ const posts = (await getCollection('posts'))
       and philosophy.
     </p>
   </div>
+
+</div>
+
+  <!-- CRT Scanline Overlay -->
+  <div class="scanlines" aria-hidden="true"></div>
+
+  <!-- Film Grain Overlay -->
+  <div class="grain" aria-hidden="true"></div>
 
 </div>
 

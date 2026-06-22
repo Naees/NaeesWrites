@@ -36,6 +36,16 @@ const displayName = tagPosts.length > 0
 
 <div class="container">
 
+  <!-- Eye-dot signature element -->
+  <span class="eye-dot" style="display: block; margin-bottom: 1rem;"></span>
+
+  <!-- Back to all tags -->
+  <div style="margin-bottom: 1.5rem;">
+    <a href="/tags/" class="tag-link" style="font-size: 0.85rem;">
+      ← back to all tags
+    </a>
+  </div>
+
   <!-- Terminal: grep -->
   <div class="prompt">
     <span class="dollar">$</span> naees@writes:~/blog$ grep -l "#${tag}" posts/*.md
@@ -52,7 +62,7 @@ const displayName = tagPosts.length > 0
   ) : (
     <div id="posts-list" role="list" aria-label="Blog posts">
       {tagPosts.map(post => (
-        <div class="post-item" role="listitem">
+        <div class="post-item post-item--filtered" role="listitem">
           <a href={`/posts/${post.id}/`}>
             <span class="post-date">{post.data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}</span>
             <div class="post-title">{post.data.title}</div>

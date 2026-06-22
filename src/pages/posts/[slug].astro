@@ -34,9 +34,12 @@ if (!post) {
 
 <div class="container">
 
+  <!-- Eye-dot signature element -->
+  <span class="eye-dot" style="display: block; margin-bottom: 1.5rem;"></span>
+
   <!-- Terminal: cat post -->
-  <div class="prompt">
-    <span class="dollar">$</span> naees@writes:~/blog$ cat posts/{slug}.md
+  <div class="prompt typing-line">
+    <span class="dollar">$</span> naees@writes:~/blog$ cat posts/{slug}.md<span class="cursor-blink">█</span>
   </div>
   <div class="divider" aria-hidden="true">~~~</div>
 
@@ -48,14 +51,6 @@ if (!post) {
 
   <h1 style="font-size: 2rem; margin-top: 0.5rem; margin-bottom: 0.5rem;">{post.title}</h1>
 
-  {post.tags && post.tags.length > 0 && (
-    <div class="post-tags-inline">
-      {post.tags.map(tag => (
-        <a href={`${base}/tags/${slugify(tag)}/`}>#{tag}</a>
-      ))}
-    </div>
-  )}
-
   <div class="divider" aria-hidden="true">~~~</div>
 
   <!-- Body -->
@@ -64,6 +59,17 @@ if (!post) {
   </div>
 
   <div class="divider" aria-hidden="true">~~~</div>
+
+  <!-- Tags -->
+  {post.tags && post.tags.length > 0 && (
+    <div class="post-tags-inline" style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-dim);">
+      {post.tags.map(tag => (
+        <a href={`${base}/tags/${slugify(tag)}/`} style="color: var(--text-dim); text-decoration-color: var(--text-muted); margin-right: 0.75rem;">
+          #{tag}
+        </a>
+      ))}
+    </div>
+  )}
 
   <!-- Comments -->
   <div class="prompt" style="margin-bottom: 1.5rem;">

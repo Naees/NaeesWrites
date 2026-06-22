@@ -6,26 +6,13 @@ interface Props {
 
 const { label, count } = Astro.props
 const base = import.meta.env.BASE_URL
-
-const tagColors = ['--blue', '--cyan', '--green', '--red', '--purple', '--yellow', '--orange', '--teal'] as const
-
-function getTagColor(tag: string): string {
-  let hash = 0
-  for (let i = 0; i < tag.length; i++) {
-    hash = tag.charCodeAt(i) + ((hash << 5) - hash)
-  }
-  const index = Math.abs(hash) % tagColors.length
-  return tagColors[index]
-}
-
-const colorVar = getTagColor(label)
 ---
 
 <a
   href={`${base}/tags/${label}/`}
-  style="display: inline-block; padding: 0.25rem 0.75rem; font-size: 0.8rem; border: 1px solid var(--border); border-radius: 999px; text-decoration: none; color: var(--${colorVar.replace('--', '')}); transition: all 0.15s ease;"
   class="tag-link"
+  style="font-size: 0.8rem;"
 >
-  {label}
-  {count !== undefined ? <span style="margin-left: 0.35rem; opacity: 0.6;">{count}</span> : null}
+  #{label}
+  {count !== undefined ? <span class="tag-count">[{count}]</span> : null}
 </a>

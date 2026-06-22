@@ -9,7 +9,9 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "auto-tag": "node --import tsx scripts/auto-tag.ts",
+    "prebuild": "node --import tsx scripts/auto-tag.ts --prebuild"
   },
   "dependencies": {
     "astro": "^6.4.7",
@@ -21,5 +23,8 @@
     "rehype-pretty-code": "^0.14.3",
     "shiki": "^4.2.0",
     "@astrojs/rss": "^4.0.14"
+  },
+  "devDependencies": {
+    "tsx": "^4.19.0"
   }
 }

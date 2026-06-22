@@ -23,3 +23,6 @@ pnpm-debug.log*
 # jetbrains setting folder
 .idea/
 /DESIGN.md
+
+# opencode
+.opencode/plans/DESIGN.md

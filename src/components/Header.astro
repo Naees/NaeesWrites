@@ -12,9 +12,16 @@ const base = import.meta.env.BASE_URL
     <a
       href={`${base}/`}
       class="nav-link"
-      style="font-size: 0.9rem;"
+      style="font-size: 0.9rem; text-decoration: none;"
+      aria-label="NaeesWrites home"
     >
-      naees@writes:~$
+      <img
+        src={`${base}/naeesWriteTypographyLogoWithHaku.svg`}
+        alt="NaeesWrites"
+        style="height: 36px; width: auto; transition: filter 0.15s ease;"
+        onmouseenter="this.style.filter='drop-shadow(0 0 12px #4a9eff33)'"
+        onmouseleave="this.style.filter='none'"
+      />
     </a>
     <nav aria-label="Main navigation" style="display: flex; align-items: center; gap: 1.5rem;">
       <a
@@ -34,6 +41,16 @@ const base = import.meta.env.BASE_URL
         class={`nav-link ${currentPage === '/tags/' ? 'nav-link--active' : ''}`}
       >
         tags
+      </a>
+      <a
+        href={`${base}/rss.xml`}
+        class="nav-link"
+        aria-label="RSS feed"
+        style="display: flex; align-items: center;"
+      >
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M6.18 15.64a2.18 2.18 0 0 1 2.18 2.18C6.18 18.58 3.36 20 0 20c3.36 0 6.18-1.42 8.36-3.62a2.18 2.18 0 0 1-2.18-2.18h2.42zm0-7.28c3.62 0 6.58 2.96 6.58 6.58 0 .36-.04.72-.12 1.06a8.36 8.36 0 0 0-6.28-2.82 8.36 8.36 0 0 0-2.82.52V10.5c0-2.82 2.32-5.14 5.14-5.14v2.5zM0 4.18V2c8.82 0 16 7.18 16 16h-2.18c0-7.58-6.24-13.82-13.82-13.82z"/>
+        </svg>
       </a>
       <a
         href="https://github.com/Naees"
@@ -70,6 +87,36 @@ const base = import.meta.env.BASE_URL
     </nav>
   </div>
 </header>
+
+<script>
+  // Scroll-aware nav
+  const header = document.querySelector('header') as HTMLElement
+  let lastScrollY = 0
+  let ticking = false
+
+  function updateNav() {
+    const currentScrollY = window.scrollY
+    if (currentScrollY <= 0) {
+      header!.classList.remove('nav-hidden')
+      header!.classList.remove('nav-scrolled')
+    } else if (currentScrollY > lastScrollY) {
+      header!.classList.add('nav-hidden')
+      header!.classList.remove('nav-scrolled')
+    } else {
+      header!.classList.remove('nav-hidden')
+      header!.classList.add('nav-scrolled')
+    }
+    lastScrollY = currentScrollY
+    ticking = false
+  }
+
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      window.requestAnimationFrame(updateNav)
+      ticking = true
+    }
+  }, { passive: true })
+</script>
 
 <script>
   const toggle = document.querySelector('.dark-mode-toggle') as HTMLElement

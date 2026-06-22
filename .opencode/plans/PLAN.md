@@ -46,6 +46,7 @@ Each post includes frontmatter:
 ## Design Direction
 - Refer to DESIGN.md for all things related to the frontend design
 - Must use the frontend-design skill
+- Iterative visual verification using Playwright MCP screenshots after each implementation phase
 
 ## Project Structure
 ```
@@ -53,6 +54,9 @@ blogsite/
   public/
     favicon.ico
     og-image.png
+    haku.svg
+    naeesWriteTypographyLogoWithHaku.svg
+    typography-logo.svg
   src/
     content/
       config.ts
@@ -89,96 +93,372 @@ blogsite/
 
 ## Development Phases
 
-### Phase 1: Setup & Core
-- Initialize Astro project
-- Configure TypeScript
-- Set up directory structure
-- Configure GitHub Actions for deployment
+### Phase 1-4: Setup, Content, Pages, Features — ✅ Completed
+- Astro project initialized with TypeScript
+- Content collection configured with 6 sample posts
+- All pages built (Home, Post, About, Tags, 404, tag archives)
+- Search functionality, dark mode toggle, giscus comments, SEO metadata
+- RSS feed, sitemap, Open Graph images
 
-### Phase 2: Content Layer
-- Create content collection configuration
-- Build markdown parsing utilities
-- Create sample posts with frontmatter
-- Implement tag system
+### Phase 5: Terminal Aesthetic — ✅ Completed
+- Near-black background (#0a0a0a) with terminal blue accent (#4a9eff)
+- Monospace headings/prompts, sans-serif body text
+- Terminal prompts (`naees@writes:~$`) as section headers
+- `~~~` dividers instead of `<hr>`
+- No card containers, no rounded corners, no gradients
+- Dark/light mode toggle with text labels
+- Terminal-style footer navigation (`→ home`, `→ about`, etc.)
+- Monospace tag links with `#` prefix
+- Light mode support
+- Responsive design (mobile tested)
+- Cross-browser testing (Playwright visual testing complete)
 
-### Phase 3: Pages & Components
-- Build Layout component (Header, Footer, content slot)
-- Build Home page with post listing
-- Build Post page with rendering
-- Build About page
-- Build Tags page + tag index page
+### Phase 6-7: Improvements & Polish — ✅ Completed
+- 6 posts across different topics
+- RSS feed support
+- Reading time indicator on post pages
+- Tag index with post counts
+- Custom 404 page
+- Accessibility improvements (aria labels, semantic HTML, focus styles)
 
-### Phase 4: Features
-- Implement search functionality
-- Add dark mode toggle
-- Integrate giscus comments
-- Add SEO metadata (meta tags, sitemap, Open Graph)
+---
 
-### Phase 5: Styling & Polish
-  - Apply brutalist terminal design system (DESIGN.md)
-  - Near-black background (#0a0a0a) with terminal blue accent (#4a9eff)
-  - Monospace headings/prompts, sans-serif body text
-  - Terminal prompts (`naees@writes:~$`) as section headers
-  - `~~~` dividers instead of `<hr>`
-  - No card containers, no rounded corners, no gradients
-  - Dark/light mode toggle with text labels
-  - Terminal-style footer navigation (`→ home`, `→ about`, etc.)
-  - Monospace tag links with `#` prefix
-  - Light mode support
-  - Responsive design (mobile tested)
-  - Cross-browser testing (Playwright visual testing complete)
+### Phase 8: Visual Enhancement — ✅ Completed
 
-### Phase 6: Testing & Deployment
-  - Test all pages and features ~~✅~~
-  - Verify GitHub Pages deployment
-  - Final polish and bug fixes ~~✅~~
+#### Phase 8.1: Global CSS Updates
+**Files:** `src/styles/global.css`
+- Update color variables: warm text (`#e6e3d9`, `#7a7568`), new `--accent-glow: #4a9eff`
+- Add animation keyframes: `blink`, `pulseGlow`, `lineIn`
+- Add `.scanlines` and `.grain` overlay classes (homepage only)
+- Add `.nav-hidden` and `.nav-scrolled` classes for scroll-aware nav
+- Add `.typing-line` class for sequential animation
+- Update button styles with offset shadow (`4px 4px 0 0 var(--bg-hover)`)
+- Update link hover with glow effect
+- **Review:** `npm run build` + Playwright screenshots of all pages
 
-### Phase 7: Improvements & Polish
-  - Add more sample posts (3+ posts across different topics) ~~✅ 6 posts exist~~
-  - Fix giscus integration (replace placeholder repo ID/category ID with real values)
-  - Add RSS feed support ~~✅~~
-  - Improve the about page content (add more bio detail, photo placeholder)
-  - Add reading time indicator on post pages ~~✅~~
-  - Improve the tags page layout (group by tag, show post counts) ~~✅~~
-  - Add a custom 404 page ~~✅~~
-  - Accessibility improvements (aria labels, semantic HTML, focus styles) ~~✅~~
+#### Phase 8.2: Header with Haku Logo
+**File:** `src/components/Header.astro`
+- Replace `naees@writes:~$` text with `naeesWriteTypographyLogoWithHaku.svg`
+- Add scroll-aware behavior (hide/reappear on scroll)
+- Add `is-scrolled` class with frosted glass background
+- Add blue `drop-shadow` on logo hover
+- Ensure logo links to home
+- **Review:** `npm run build` + Playwright screenshots of header on all pages
 
-## Subagents
+#### Phase 8.3: Homepage Animations
+**File:** `src/pages/index.astro`
+- Add glowing eye-dot near hero title (signature element)
+- Add typing animation to `ls -la posts/` prompt
+- Add blinking cursor to active prompt
+- Add CRT scanline overlay (homepage only)
+- Add film grain overlay (homepage only)
+- **Review:** `npm run build` + Playwright screenshots of homepage (dark/light)
 
-### Subagent 1: Setup & Configuration
-- Initialize Astro project
-- Configure TypeScript, linting
-- Set up GitHub Actions workflow for GitHub Pages
-- Configure content collections
+#### Phase 8.4: About Page Animations
+**File:** `src/pages/about.astro`
+- Add typing animation to `whoami` prompt
+- Add typing animation to `cat about.txt` prompt
+- Add blinking cursor to all prompts
+- **Review:** `npm run build` + Playwright screenshots of about page
 
-### Subagent 2: Content Layer & Data Layer
-- Create content collection schema
-- Build markdown processing utilities
-- Create sample content
-- Implement tag/category system
-- Build search index generation
+#### Phase 8.5: Tags Page Animations
+**File:** `src/pages/tags.astro`
+- Add typing animation to `find` prompt
+- Add blinking cursor
+- **Review:** `npm run build` + Playwright screenshots of tags page
 
-### Subagent 3: Pages & Components
-- Build Layout, Header, Footer components
-- Build Home page with post listing
-- Build individual Post page
-- Build About page
-- Build Tags page and tag index pages
-- Build PostCard component
+#### Phase 8.6: Post Page Animations
+**File:** `src/pages/posts/[slug].astro`
+- Add typing animation to `cat posts/[slug].md` prompt
+- Add blinking cursor
+- **Review:** `npm run build` + Playwright screenshots of post page
 
-### Subagent 4: Features & Styling
-- Implement search functionality
-- Add dark mode toggle
-- Integrate giscus comments
-- Add SEO optimization
-- Apply design system and styling
-- Responsive design implementation
+#### Phase 8.7: 404 Page Animations
+**File:** `src/pages/404.astro`
+- Add typing animation to `cat /dev/null` prompt
+- Add blinking cursor
+- **Review:** `npm run build` + Playwright screenshots of 404 page
+
+#### Phase 8.8: Footer Polish + Final Review
+**Files:** `src/components/Footer.astro`, all pages
+- Add offset shadow to buttons
+- Verify mobile responsiveness across all pages
+- Verify dark/light mode consistency
+- Performance check (scanlines/grain overhead, animation performance)
+- Update DESIGN.md and PLAN.md with any decisions made during implementation
+- **Review:** Full Playwright screenshot suite (all pages, dark/light modes)
+
+---
+
+### Phase 9: Tags Page Revamp (Option C — Hybrid) — ✅ Completed
+
+#### Phase 9.1: Tags Index Page — Filterable Tag Pills + Post List
+**Files:** `src/pages/tags.astro`, `src/components/Tag.astro`, `src/styles/global.css`
+
+**Goal:** Replace the current redundant tag list + grouped posts layout with a clean hybrid layout.
+
+**Tag pills section:**
+- Display all 7 tags as colored pill badges at the top (reusing `Tag.astro` component)
+- Add a "Show All" pill (default active state)
+- Each pill shows tag name + post count
+- Active tag gets blue glow via `pulseGlow` animation
+- Clicking a pill triggers client-side filtering (no page reload)
+
+**Post list section:**
+- Single chronological post list below (no grouping by tag)
+- Each post shows date, title, description, and inline tags
+- Clicking a tag pill filters posts via client-side JS
+- Smooth opacity transition on filtered posts
+- "Show All" resets to unfiltered view
+
+**Client-side filtering:**
+- Each post card gets `data-tags` attribute with slugified tag list
+- Each tag pill gets `data-tag` attribute
+- JS toggles `display` on `.post-item` elements based on tag match
+- Active pill gets `.tag-pill--active` class with blue glow
+
+**Terminal aesthetic:**
+- Keep `find` prompt above tag pills
+- Keep `grep` prompt above post list
+- Keep `~~~` dividers between sections
+
+**Review:** `npm run build` + Playwright screenshots (dark/light)
+
+#### Phase 9.2: Tag Archive Page — Back Link + Polish
+**File:** `src/pages/tags/[tag].astro`
+
+**Goal:** Minor UX improvements to the individual tag archive page.
+
+- Add "← Back to all tags" link at the top
+- Keep existing `grep` terminal prompt + post list
+- Ensure active state styling matches tags index
+- Keep existing empty state ("No posts found.")
+
+**Review:** `npm run build` + Playwright screenshots
+
+#### Phase 9.3: CSS — Tag Pill Styles
+**File:** `src/styles/global.css`
+
+**New styles:**
+```css
+.tag-pill {
+  display: inline-block;
+  padding: 0.35rem 0.85rem;
+  font-size: 0.8rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  text-decoration: none;
+  color: var(--text-dim);
+  transition: all 0.15s ease;
+  cursor: pointer;
+}
+.tag-pill:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+.tag-pill--active {
+  color: var(--accent);
+  border-color: var(--accent);
+  animation: pulseGlow 2s ease-in-out infinite;
+}
+.tag-filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+}
+.post-item--filtered {
+  transition: opacity 0.2s ease;
+}
+.post-item--hidden {
+  opacity: 0.15;
+  pointer-events: none;
+}
+```
+
+**Review:** Manual visual check
+
+---
+
+### Phase 10: Heuristic Auto-Tagging — ✅ Completed
+
+#### Phase 10.1: Keyword-to-Tag Map
+**File:** `src/lib/utils.ts` (new function `TAG_KEYWORD_MAP`)
+
+**Map structure:**
+```typescript
+export const TAG_KEYWORD_MAP: Record<string, string[]> = {
+  'design': ['design', 'ui', 'ux', 'layout', 'typography', 'color', 'minimal', 'visual', 'aesthetic', 'interface'],
+  'philosophy': ['philosophy', 'thought', 'meaning', 'value', 'principle', 'mindset', 'perspective', 'reflection'],
+  'technology': ['technology', 'tech', 'tool', 'software', 'stack', 'system', 'architecture', 'build', 'code'],
+  'webdev': ['web', 'html', 'css', 'javascript', 'frontend', 'backend', 'server', 'deploy', 'hosting', 'static'],
+  'security': ['security', 'threat', 'attack', 'vulnerability', 'risk', 'defense', 'privacy', 'encryption', 'auth'],
+  'writing': ['write', 'writing', 'word', 'narrative', 'story', 'prose', 'voice', 'craft'],
+  'meta': ['meta', 'blog', 'update', 'note', 'introduction', 'welcome'],
+}
+```
+
+**Review:** Manual review
+
+#### Phase 10.2: Auto-Tag Suggestion Script
+**File:** `scripts/auto-tag.ts`
+
+**Function: `suggestTags(title, description, body, existingTags)`**
+- Scans title (2x weight), description (1.5x), body (1x) for keyword matches
+- Counts matches per tag
+- Returns top 3-4 tags with highest scores
+- Excludes tags already in `existingTags`
+- Score threshold to avoid noisy suggestions
+
+**Script behavior:**
+- Reads all posts from `src/content/posts/`
+- Calls `suggestTags()` for each post
+- Outputs `.auto-tags.json` to `dist/.auto-tags.json`
+- Prints suggestions to console with `[ACCEPT] / [SKIP]` prompts
+- **Non-destructive by default** — does NOT modify source files
+- If user confirms, updates post frontmatter directly with `front-matter` npm package
+
+**Review:** Run script, verify suggestions against existing tags
+
+#### Phase 10.3: Build Integration
+**File:** `package.json`
+
+```json
+"scripts": {
+  "prebuild": "node --import tsx scripts/auto-tag.ts",
+  "auto-tag": "node --import tsx scripts/auto-tag.ts",
+  ...
+}
+```
+
+**Review:** `npm run build` verifies no errors
+
+---
+
+### Phase 11: Frontend Fixes (DESIGN.md Compliance) — ✅ Completed
+
+#### Phase 11.1: Remove Colored Tag Pills — Use Monospace Text
+**Files:** `src/components/Tag.astro`, `src/components/PostCard.astro`
+
+**DESIGN.md §11 §225-228 violation:** Tags should be monospace text links, not colored pills.
+
+**Changes:**
+- `Tag.astro`: Remove color hash logic, render as plain monospace `<a>` with `#` prefix
+- `PostCard.astro`: Remove color hash logic, render tags as plain monospace `<a>` with `#` prefix
+- Update CSS to remove `.tag-{color}` classes
+- Keep `data-tag` attribute for client-side filtering (Phase 9)
+
+**Review:** Compare against DESIGN.md §225-228
+
+#### Phase 11.2: Remove Tags from Homepage
+**File:** `src/pages/index.astro`
+
+**DESIGN.md §187 violation:** "no tags displayed on homepage"
+
+**Changes:**
+- Remove tag rendering block (lines 53-58) from homepage post items
+- Keep tags on post detail pages and tag archive pages
+
+**Review:** `npm run build` + Playwright screenshot of homepage
+
+#### Phase 11.3: Fix Giscus Dark Mode Sync
+**File:** `src/components/GiscusComments.astro`
+
+**Bug:** `#dark-mode-toggle` (ID selector) doesn't match `.dark-mode-toggle` (class selector) used in `Header.astro`
+
+**Changes:**
+- Use `document.querySelector('.dark-mode-toggle')` instead of `getElementById`
+- Add `MutationObserver` to detect theme changes via `[data-theme]` attribute
+- Re-load Giscus on any theme change (not just toggle click)
+
+**Review:** Test dark mode toggle on post pages with comments
+
+#### Phase 11.4: Fix Undefined `--border` CSS Variable
+**Files:** `src/components/PostCard.astro`, `src/styles/global.css`
+
+**Bug:** `PostCard.astro:39` references `var(--border)` which is not defined in `:root`
+
+**Changes:**
+- Add `--border: #1a1a1a` to `:root` dark variables
+- Add `--border: #d0d0d0` to `[data-theme='light']` variables
+- Verify `PostCard.astro`, `Tag.astro`, and any other files using `var(--border)`
+
+**Review:** Manual visual check
+
+#### Phase 11.5: Clean Up Duplicate `.btn` Class
+**File:** `src/styles/global.css`
+
+**Issue:** `.btn` defined twice (lines 405-421 and 583-601). Second definition overrides the first.
+
+**Changes:**
+- Merge both `.btn` definitions into a single rule
+- Keep offset shadow behavior from the second definition
+- Remove the duplicate
+
+**Review:** `npm run build` + visual check on 404 page button
+
+#### Phase 11.6: Style Post Page Tags
+**File:** `src/pages/posts/[slug].astro`
+
+**Issue:** Tags rendered as plain `#{tag}` links with no visual distinction from body text.
+
+**Changes:**
+- Wrap tags in a styled container with monospace font
+- Add `#` prefix styling (accent color)
+- Separate from body text with `~~~` divider
+- Follow terminal aesthetic pattern
+
+**Review:** `npm run build` + Playwright screenshot of post page
+
+---
+
+### Phase 12: Minor Enhancements — ✅ Completed
+
+#### Phase 12.1: Add RSS Feed Icon to Navigation
+**File:** `src/components/Header.astro`
+
+**Changes:**
+- Add RSS icon link to nav (between `tags` and GitHub)
+- Link to `/rss.xml`
+- Use RSS icon SVG (inline or from public assets)
+- Tooltip or aria-label: "RSS feed"
+
+**Review:** Visual check on all pages
+
+#### Phase 12.2: Add Site-Wide Post Count + Last Updated
+**Files:** `src/components/Footer.astro` or `src/components/Header.astro`
+
+**Changes:**
+- Display total post count (e.g., "6 posts")
+- Display last updated date
+- Terminal-style format: `6 posts · last updated Jun 10, 2025`
+- Monospace font, dim color
+
+**Review:** Visual check
+
+#### Phase 12.3: Update DESIGN.md Decisions Log
+**File:** `DESIGN.md` section 14
+
+**Changes:**
+- Update all "planned" entries in section 14 to "done" for Phase 8 items
+- Add new entries for Phase 9-12 decisions
+
+---
+
+## Review Process
+
+After each phase of implementation:
+
+1. **Build**: `npm run build` to verify no errors
+2. **Screenshot**: Use Playwright MCP to capture visual test screenshots of all pages (dark and light modes)
+3. **Review**: Compare screenshots against DESIGN.md specifications
+4. **Fix**: Adjust any visual inconsistencies before moving to next phase
+5. **Document**: Update DESIGN.md and PLAN.md with any decisions made during implementation
+
+This ensures visual consistency and catches issues early. The **frontend-design skill** should be loaded during implementation for design guidance. Playwright MCP screenshots are used for iterative visual verification.
 
 ## Security Considerations
 - No server-side code — fully static
 - giscus uses GitHub token (stored as GitHub secret)
 - No database, no API keys required
 - Content managed via git (version controlled)
-
-## Open Questions
-- (To be addressed during development)

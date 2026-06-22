@@ -19,16 +19,32 @@ const tagCounts = getTagCount(posts)
 
 <div class="container">
 
+  <!-- Eye-dot signature element -->
+  <span class="eye-dot" style="display: block; margin-bottom: 1rem;"></span>
+
   <!-- Terminal: find -->
-  <div class="prompt">
-    <span class="dollar">$</span> naees@writes:~/blog$ find . -name "*.md" -path "*/posts/*" | sort -u
+  <div style="margin-bottom: 1.5rem;">
+    <div class="prompt typing-line">
+      <span class="dollar">$</span> naees@writes:~/blog$ find . -name "*.md" -path "*/posts/*" | sort -u<span class="cursor-blink">█</span>
+    </div>
   </div>
   <div class="divider" aria-hidden="true">~~~</div>
 
-  <!-- Tag list — plain monospace text, no badges -->
-  <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 3rem;">
+  <!-- Tag pills filter bar -->
+  <div class="tag-filter-bar" style="margin-bottom: 3rem;">
+    <a
+      href="/tags/"
+      class="tag-pill tag-pill--active"
+      data-tag="all"
+    >
+      show all
+    </a>
     {allTags.map(tag => (
-      <a href={`/tags/${slugify(tag)}/`} class="tag-link">
+      <a
+        href={`/tags/${slugify(tag)}/`}
+        class="tag-pill"
+        data-tag={slugify(tag)}
+      >
         {tag}<span class="tag-count">[{tagCounts.get(tag)}]</span>
       </a>
     ))}
@@ -37,39 +53,93 @@ const tagCounts = getTagCount(posts)
   <div class="divider" aria-hidden="true">~~~</div>
 
   <!-- Terminal: grep -->
-  <div class="prompt" style="margin-bottom: 1.5rem;">
-    <span class="dollar">$</span> naees@writes:~/blog$ grep -l "#" posts/*.md | sort -u
+  <div style="margin-bottom: 1.5rem;">
+    <div class="prompt typing-line">
+      <span class="dollar">$</span> naees@writes:~/blog$ grep -l "#" posts/*.md | sort -u<span class="cursor-blink">█</span>
+    </div>
   </div>
 
-  <!-- Tagged posts grouped by tag -->
-  {allTags.map(tag => {
-    const tagPosts = posts.filter(post =>
-      (post.data.tags || []).map(t => slugify(t)).includes(slugify(tag))
-    )
-    if (tagPosts.length === 0) return null
-    return (
-      <div style="margin-bottom: 2.5rem;" role="region" aria-labelledby={`tag-${slugify(tag)}`}>
-        <h2 id={`tag-${slugify(tag)}`} style="font-size: 1rem; margin-top: 0; margin-bottom: 1rem; color: var(--accent);">
-          {tag}
-          <span style="color: var(--text-dim); font-size: 0.8rem; margin-left: 0.5rem;">[{tagPosts.length}]</span>
-        </h2>
-        <ul style="list-style: none; padding: 0;">
-          {tagPosts.map(post => (
-            <li style="margin-bottom: 0.75rem; padding-left: 1rem; border-left: 1px solid var(--text-muted);">
-              <a
-                href={`/posts/${post.id}/`}
-                style="text-decoration: none; color: var(--text);"
-              >
-                <span style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-dim); margin-right: 0.5rem;">{post.data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}</span>
-                {post.data.title}
-              </a>
-            </li>
-          ))}
-        </ul>
+  <!-- Chronological post list -->
+  <div id="posts-list" role="list" aria-label="Blog posts">
+    {posts.map(post => (
+      <div
+        class="post-item post-item--filtered"
+        role="listitem"
+        data-tags={post.data.tags?.map(t => slugify(t)).join(' ')}
+      >
+        <a href={`/posts/${post.id}/`}>
+          <span class="post-date">{post.data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}</span>
+          <div class="post-title">{post.data.title}</div>
+          <p class="post-desc">{post.data.description}</p>
+          {post.data.tags && post.data.tags.length > 0 && (
+            <div class="post-tags">
+              {post.data.tags.map((tag, i) => (
+                <span>{tag}{i < post.data.tags!.length - 1 ? ' ' : ''}</span>
+              ))}
+            </div>
+          )}
+        </a>
       </div>
-    )
-  })}
+    ))}
+  </div>
 
 </div>
+
+<script>
+  const filterBar = document.querySelector('.tag-filter-bar') as HTMLElement
+  const postsList = document.getElementById('posts-list')
+  const items = postsList?.querySelectorAll('.post-item--filtered')
+  const pills = filterBar?.querySelectorAll('.tag-pill')
+
+  function filterPosts(tag: string) {
+    items?.forEach(item => {
+      const postTags = (item as HTMLElement).dataset.tags || ''
+      if (tag === 'all' || !tag) {
+        ;(item as HTMLElement).style.opacity = '1'
+        ;(item as HTMLElement).style.pointerEvents = 'auto'
+      } else {
+        const tags = postTags.split(' ')
+        const match = tags.includes(tag)
+        ;(item as HTMLElement).style.opacity = match ? '1' : '0.15'
+        ;(item as HTMLElement).style.pointerEvents = match ? 'auto' : 'none'
+      }
+    })
+
+    pills?.forEach(pill => {
+      const pillTag = (pill as HTMLElement).dataset.tag || ''
+      if (pillTag === tag) {
+        pill.classList.add('tag-pill--active')
+      } else {
+        pill.classList.remove('tag-pill--active')
+      }
+    })
+  }
+
+  filterBar?.addEventListener('click', (e) => {
+    const target = e.target as HTMLElement
+    const pill = target.closest('.tag-pill')
+    if (!pill) return
+
+    e.preventDefault()
+    const tag = pill.dataset.tag || 'all'
+
+    const url = tag === 'all' ? '/tags/' : `/tags/${tag}/`
+    history.pushState({ tag }, '', url)
+
+    filterPosts(tag)
+  })
+
+  window.addEventListener('popstate', (e) => {
+    const state = e.state as { tag?: string } | null
+    const tag = state?.tag || 'all'
+    filterPosts(tag)
+  })
+
+  const currentPath = window.location.pathname
+  if (currentPath !== '/tags/') {
+    const tag = currentPath.split('/').filter(Boolean).pop() || 'all'
+    filterPosts(tag)
+  }
+</script>
 
 </Layout>

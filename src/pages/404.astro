@@ -10,9 +10,12 @@ import Layout from '../components/Layout.astro'
 
 <div class="container error-404">
   <div style="max-width: 480px;">
+    <!-- Eye-dot signature element -->
+    <span class="eye-dot" style="display: block; margin-bottom: 1.5rem;"></span>
+
     <!-- Terminal: cat /dev/null -->
-    <div class="prompt" style="margin-bottom: 1rem;">
-      <span class="dollar">$</span> server ~ $ cat /dev/null
+    <div class="prompt typing-line" style="margin-bottom: 1rem;">
+      <span class="dollar">$</span> server ~ $ cat /dev/null<span class="cursor-blink">█</span>
     </div>
     <div class="divider" aria-hidden="true">~~~</div>
 

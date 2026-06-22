@@ -1,4 +1,12 @@
 ---
+import { getCollection } from 'astro:content'
+
+const posts = (await getCollection('posts'))
+  .filter(post => !post.data.draft)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+
+const postCount = posts.length
+const lastUpdated = posts[0]?.data.date
 const currentYear = new Date().getFullYear()
 const base = import.meta.env.BASE_URL
 ---
@@ -13,7 +21,7 @@ const base = import.meta.env.BASE_URL
       <a href="https://keybase.io/Naees/pgp_keys.asc" target="_blank" rel="noopener noreferrer">→ pgp</a>
     </nav>
     <div class="footer-copy">
-      &copy; {currentYear} naeeswrites
+      &copy; {currentYear} naeeswrites · {postCount} posts · last updated {lastUpdated?.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
     </div>
   </div>
 </footer>

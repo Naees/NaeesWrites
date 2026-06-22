@@ -11,17 +11,27 @@ const category = 'Blog Comments'
 const categoryId = 'DIC_kwDONaees'
 ---
 
+<div id="giscus-container"
+  data-repo={repo}
+  data-repo-id={repoId}
+  data-category={category}
+  data-category-id={categoryId}
+  data-term={currentSlug}>
+</div>
+
 <script is:inline>
   function loadGiscus() {
+    const container = document.getElementById('giscus-container')
+    if (!container) return
     const theme = localStorage.getItem('theme') || 'preferred'
     const s = document.createElement('script')
     s.src = 'https://giscus.app/client.js'
-    s.setAttribute('data-repo', repo)
-    s.setAttribute('data-repo-id', repoId)
-    s.setAttribute('data-category', category)
-    s.setAttribute('data-category-id', categoryId)
+    s.setAttribute('data-repo', container.dataset.repo)
+    s.setAttribute('data-repo-id', container.dataset.repoId)
+    s.setAttribute('data-category', container.dataset.category)
+    s.setAttribute('data-category-id', container.dataset.categoryId)
     s.setAttribute('data-mapping', 'pathname')
-    s.setAttribute('data-term', currentSlug)
+    s.setAttribute('data-term', container.dataset.term)
     s.setAttribute('data-strict', '0')
     s.setAttribute('data-reactions-enabled', '1')
     s.setAttribute('data-emit-metadata', '0')
@@ -30,14 +40,23 @@ const categoryId = 'DIC_kwDONaees'
     s.setAttribute('data-lang', 'en')
     s.setAttribute('crossorigin', 'anonymous')
     s.async = true
-    document.getElementById('giscus-container')!.appendChild(s)
+    container.appendChild(s)
   }
   loadGiscus()
 
-  const toggle = document.getElementById('dark-mode-toggle')
+  const toggle = document.querySelector('.dark-mode-toggle')
   if (toggle) {
     toggle.addEventListener('click', () => {
       setTimeout(loadGiscus, 100)
     })
   }
+
+  const observer = new MutationObserver((mutations) => {
+    for (const mutation of mutations) {
+      if (mutation.attributeName === 'data-theme') {
+        setTimeout(loadGiscus, 100)
+      }
+    }
+  })
+  observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] })
 </script>

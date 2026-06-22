@@ -9,38 +9,21 @@ interface Props {
 
 const { title, date, description, tags, slug } = Astro.props
 const base = import.meta.env.BASE_URL
-
-const tagColors = ['--blue', '--cyan', '--green', '--red', '--purple', '--yellow', '--orange', '--teal'] as const
-
-function getTagColor(tag: string): string {
-  let hash = 0
-  for (let i = 0; i < tag.length; i++) {
-    hash = tag.charCodeAt(i) + ((hash << 5) - hash)
-  }
-  const index = Math.abs(hash) % tagColors.length
-  return tagColors[index]
-}
 ---
 
 <article style="padding: 1.5rem 0; border-bottom: 1px solid var(--border);">
   <a href={`${base}/posts/${slug}/`} style="text-decoration: none; color: var(--text); display: block;">
     <h2 style="margin-top: 0; font-size: 1.5rem; letter-spacing: -0.02em;">{title}</h2>
   </a>
-  <time style="color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 0.5rem; display: block;">
+  <time style="color: var(--text-dim); font-size: 0.85rem; margin-bottom: 0.5rem; display: block;">
     {date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
   </time>
-  <p style="color: var(--text-secondary); margin-bottom: 0.75rem;">{description}</p>
-  <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
-    {tags.map(tag => {
-      const colorVar = getTagColor(tag)
-      return (
-        <span
-          class={`tag-${colorVar.replace('--', '')}`}
-          style="display: inline-block; padding: 0.15rem 0.6rem; font-size: 0.75rem; border: 1px solid var(--border); border-radius: 999px;"
-        >
-          {tag}
-        </span>
-      )
-    })}
+  <p style="color: var(--text-dim); margin-bottom: 0.75rem;">{description}</p>
+  <div class="post-tags-inline" style="font-family: var(--font-mono); font-size: 0.75rem;">
+    {tags.map(tag => (
+      <a href={`${base}/tags/${tag}/`} style="color: var(--text-dim); text-decoration-color: var(--text-muted); margin-right: 0.5rem;">
+        #{tag}
+      </a>
+    ))}
   </div>
 </article>

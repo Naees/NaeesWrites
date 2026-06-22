@@ -89,27 +89,27 @@ const tagCounts = getTagCount(posts)
 <script define:vars={{
   base: base
 }}>
-  const filterBar = document.querySelector('.tag-filter-bar') as HTMLElement
+  const filterBar = document.querySelector('.tag-filter-bar')
   const postsList = document.getElementById('posts-list')
   const items = postsList?.querySelectorAll('.post-item--filtered')
   const pills = filterBar?.querySelectorAll('.tag-pill')
 
-  function filterPosts(tag: string) {
+  function filterPosts(tag) {
     items?.forEach(item => {
-      const postTags = (item as HTMLElement).dataset.tags || ''
+      const postTags = item.dataset.tags || ''
       if (tag === 'all' || !tag) {
-        ;(item as HTMLElement).style.opacity = '1'
-        ;(item as HTMLElement).style.pointerEvents = 'auto'
+        item.style.opacity = '1'
+        item.style.pointerEvents = 'auto'
       } else {
         const tags = postTags.split(' ')
         const match = tags.includes(tag)
-        ;(item as HTMLElement).style.opacity = match ? '1' : '0.15'
-        ;(item as HTMLElement).style.pointerEvents = match ? 'auto' : 'none'
+        item.style.opacity = match ? '1' : '0.15'
+        item.style.pointerEvents = match ? 'auto' : 'none'
       }
     })
 
     pills?.forEach(pill => {
-      const pillTag = (pill as HTMLElement).dataset.tag || ''
+      const pillTag = pill.dataset.tag || ''
       if (pillTag === tag) {
         pill.classList.add('tag-pill--active')
       } else {
@@ -119,7 +119,7 @@ const tagCounts = getTagCount(posts)
   }
 
   filterBar?.addEventListener('click', (e) => {
-    const target = e.target as HTMLElement
+    const target = e.target
     const pill = target.closest('.tag-pill')
     if (!pill) return
 
@@ -133,7 +133,7 @@ const tagCounts = getTagCount(posts)
   })
 
   window.addEventListener('popstate', (e) => {
-    const state = e.state as { tag?: string } | null
+    const state = e.state || null
     const tag = state?.tag || 'all'
     filterPosts(tag)
   })

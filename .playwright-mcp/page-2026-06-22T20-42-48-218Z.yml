@@ -1,0 +1,46 @@
+- generic [active] [ref=e1]:
+  - img
+  - img
+  - banner [ref=e2]:
+    - generic [ref=e3]:
+      - link "NaeesWrites home" [ref=e4] [cursor=pointer]:
+        - /url: /NaeesWrites/
+        - img "NaeesWrites" [ref=e5]
+      - navigation "Main navigation" [ref=e6]:
+        - link "home" [ref=e7] [cursor=pointer]:
+          - /url: /NaeesWrites/
+        - link "about" [ref=e8] [cursor=pointer]:
+          - /url: /NaeesWrites/about/
+        - link "tags" [ref=e9] [cursor=pointer]:
+          - /url: /NaeesWrites/tags/
+        - link "RSS feed" [ref=e10] [cursor=pointer]:
+          - /url: /NaeesWrites/rss.xml
+          - img [ref=e11]
+        - link "GitHub" [ref=e13] [cursor=pointer]:
+          - /url: https://github.com/Naees
+          - img [ref=e14]
+        - button "Toggle dark mode" [ref=e16] [cursor=pointer]:
+          - img [ref=e18]
+          - generic [ref=e24]: light
+  - main [ref=e25]:
+    - generic [ref=e28]:
+      - generic [ref=e30]: $ server ~ $ cat /dev/null█
+      - generic [ref=e31]: ~~~
+      - heading "404" [level=1] [ref=e32]
+      - paragraph [ref=e33]: The page you are looking for does not exist.
+      - link "← go home" [ref=e34] [cursor=pointer]:
+        - /url: /
+  - contentinfo [ref=e35]:
+    - generic [ref=e36]:
+      - navigation "Footer navigation" [ref=e37]:
+        - link "→ home" [ref=e38] [cursor=pointer]:
+          - /url: /NaeesWrites/
+        - link "→ about" [ref=e39] [cursor=pointer]:
+          - /url: /NaeesWrites/about/
+        - link "→ tags" [ref=e40] [cursor=pointer]:
+          - /url: /NaeesWrites/tags/
+        - link "→ github" [ref=e41] [cursor=pointer]:
+          - /url: https://github.com/Naees
+        - link "→ pgp" [ref=e42] [cursor=pointer]:
+          - /url: https://keybase.io/Naees/pgp_keys.asc
+      - generic [ref=e43]: © 2026 naeeswrites · 6 posts · last updated Jun 10, 2025

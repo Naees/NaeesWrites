@@ -1,0 +1,58 @@
+- generic [active] [ref=e1]:
+  - img
+  - img
+  - banner [ref=e2]:
+    - generic [ref=e3]:
+      - link "NaeesWrites home" [ref=e4] [cursor=pointer]:
+        - /url: /NaeesWrites/
+        - img "NaeesWrites" [ref=e5]
+      - navigation "Main navigation" [ref=e6]:
+        - link "home" [ref=e7] [cursor=pointer]:
+          - /url: /NaeesWrites/
+        - link "about" [ref=e8] [cursor=pointer]:
+          - /url: /NaeesWrites/about/
+        - link "tags" [ref=e9] [cursor=pointer]:
+          - /url: /NaeesWrites/tags/
+        - link "RSS feed" [ref=e10] [cursor=pointer]:
+          - /url: /NaeesWrites/rss.xml
+          - img [ref=e11]
+        - link "GitHub" [ref=e13] [cursor=pointer]:
+          - /url: https://github.com/Naees
+          - img [ref=e14]
+        - button "Toggle dark mode" [ref=e16] [cursor=pointer]:
+          - img [ref=e18]
+          - generic [ref=e24]: light
+  - main [ref=e25]:
+    - generic [ref=e27]:
+      - generic [ref=e29]: $ naees@writes:~/blog$ cat posts/on-reading.md█
+      - generic [ref=e30]: ~~~
+      - generic [ref=e31]: June 10, 2025 · 2 min read
+      - heading "On Reading for Writers" [level=1] [ref=e32]
+      - generic [ref=e33]: ~~~
+      - generic [ref=e34]: "Writers are readers. This is a cliché because it's true. But most writers don't read the way they should. ## Reading vs. Studying There's a difference between reading for pleasure and reading as a writer. **Reading for pleasure** is about the experience. You're along for the ride. **Reading as a writer** is about the craft. You're paying attention to how the author builds the ride. Both are valid. Both are necessary. But they require different modes of attention. ## What to Look For When I read as a writer, I pay attention to: 1. **Structure** — How does the author organize their ideas? 2. **Pacing** — Where do they speed up? Slow down? 3. **Word choice** — What words carry weight? What gets trimmed? 4. **Transitions** — How do they move between ideas? 5. **Voice** — What makes this writer sound like themselves? You don't need to analyze every sentence. Just notice the patterns. ## Reading Widely The best writers read outside their comfort zone. If you only read what you already enjoy, your voice will sound like everyone else's. Read things you disagree with. Read things written for a different audience. Read things in different formats — essays, letters, manuals, dialogues. ## The Output Matters Reading without writing is consumption. Writing without reading is repetition. The feedback loop between the two is where growth happens. Read widely. Write specifically. Repeat."
+      - generic [ref=e35]: ~~~
+      - generic [ref=e36]:
+        - link "#philosophy" [ref=e37] [cursor=pointer]:
+          - /url: /NaeesWrites/tags/philosophy/
+        - link "#design" [ref=e38] [cursor=pointer]:
+          - /url: /NaeesWrites/tags/design/
+      - generic [ref=e39]: $ naees@writes:~/blog$ ./comments.sh
+      - iframe [ref=e43]:
+        - generic [active] [ref=f1e1]:
+          - main [ref=f1e3]:
+            - generic [ref=f1e6]: Loading comments…
+          - alert [ref=f1e7]
+  - contentinfo [ref=e44]:
+    - generic [ref=e45]:
+      - navigation "Footer navigation" [ref=e46]:
+        - link "→ home" [ref=e47] [cursor=pointer]:
+          - /url: /NaeesWrites/
+        - link "→ about" [ref=e48] [cursor=pointer]:
+          - /url: /NaeesWrites/about/
+        - link "→ tags" [ref=e49] [cursor=pointer]:
+          - /url: /NaeesWrites/tags/
+        - link "→ github" [ref=e50] [cursor=pointer]:
+          - /url: https://github.com/Naees
+        - link "→ pgp" [ref=e51] [cursor=pointer]:
+          - /url: https://keybase.io/Naees/pgp_keys.asc
+      - generic [ref=e52]: © 2026 naeeswrites · 6 posts · last updated Jun 10, 2025

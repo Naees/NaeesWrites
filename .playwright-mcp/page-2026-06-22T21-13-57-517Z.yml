@@ -1,0 +1,104 @@
+- generic [active] [ref=e1]:
+  - img
+  - img
+  - banner [ref=e2]:
+    - generic [ref=e3]:
+      - link "NaeesWrites home" [ref=e4] [cursor=pointer]:
+        - /url: /NaeesWrites/
+        - img "NaeesWrites" [ref=e5]
+      - navigation "Main navigation" [ref=e6]:
+        - link "home" [ref=e7] [cursor=pointer]:
+          - /url: /NaeesWrites/
+        - link "about" [ref=e8] [cursor=pointer]:
+          - /url: /NaeesWrites/about/
+        - link "tags" [ref=e9] [cursor=pointer]:
+          - /url: /NaeesWrites/tags/
+        - link "RSS feed" [ref=e10] [cursor=pointer]:
+          - /url: /NaeesWrites/rss.xml
+          - img [ref=e11]
+        - link "GitHub" [ref=e13] [cursor=pointer]:
+          - /url: https://github.com/Naees
+          - img [ref=e14]
+        - button "Toggle dark mode" [ref=e16] [cursor=pointer]:
+          - img [ref=e18]
+          - generic [ref=e24]: light
+  - main [ref=e25]:
+    - generic [ref=e27]:
+      - generic [ref=e30]: $ naees@writes:~/blog$ find . -name "*.md" -path "*/posts/*" | sort -u█
+      - generic [ref=e31]: ~~~
+      - generic [ref=e32]:
+        - link "show all" [ref=e33] [cursor=pointer]:
+          - /url: /NaeesWrites/tags/
+        - link "design[2]" [ref=e34] [cursor=pointer]:
+          - /url: /NaeesWrites/tags/design/
+        - link "introduction[1]" [ref=e35] [cursor=pointer]:
+          - /url: /NaeesWrites/tags/introduction/
+        - link "meta[1]" [ref=e36] [cursor=pointer]:
+          - /url: /NaeesWrites/tags/meta/
+        - link "philosophy[3]" [ref=e37] [cursor=pointer]:
+          - /url: /NaeesWrites/tags/philosophy/
+        - link "security[1]" [ref=e38] [cursor=pointer]:
+          - /url: /NaeesWrites/tags/security/
+        - link "technology[2]" [ref=e39] [cursor=pointer]:
+          - /url: /NaeesWrites/tags/technology/
+        - link "webdev[2]" [ref=e40] [cursor=pointer]:
+          - /url: /NaeesWrites/tags/webdev/
+      - generic [ref=e41]: ~~~
+      - generic [ref=e43]: $ naees@writes:~/blog$ grep -l "#" posts/*.md | sort -u█
+      - list "Blog posts" [ref=e44]:
+        - listitem [ref=e45] [cursor=pointer]:
+          - link "Jun 10, 2025 On Reading for Writers How reading differently can make you write better. philosophy design" [ref=e46]:
+            - /url: /NaeesWrites/posts/on-reading/
+            - generic [ref=e47]: Jun 10, 2025
+            - generic [ref=e48]: On Reading for Writers
+            - paragraph [ref=e49]: How reading differently can make you write better.
+            - generic [ref=e50]: philosophy design
+        - listitem [ref=e51] [cursor=pointer]:
+          - link "May 20, 2025 Why I Switched to a Static Site The journey from a complex setup to a simple, reliable blog. technology philosophy" [ref=e52]:
+            - /url: /NaeesWrites/posts/why-static-sites-2/
+            - generic [ref=e53]: May 20, 2025
+            - generic [ref=e54]: Why I Switched to a Static Site
+            - paragraph [ref=e55]: The journey from a complex setup to a simple, reliable blog.
+            - generic [ref=e56]: technology philosophy
+        - listitem [ref=e57] [cursor=pointer]:
+          - link "Apr 15, 2025 Threat Modeling for Small Teams A practical approach to threat modeling that doesn't require a dedicated security team. security webdev" [ref=e58]:
+            - /url: /NaeesWrites/posts/threat-modeling/
+            - generic [ref=e59]: Apr 15, 2025
+            - generic [ref=e60]: Threat Modeling for Small Teams
+            - paragraph [ref=e61]: A practical approach to threat modeling that doesn't require a dedicated security team.
+            - generic [ref=e62]: security webdev
+        - listitem [ref=e63] [cursor=pointer]:
+          - link "Mar 10, 2025 The Case for Minimalist Design Why less is more when it comes to designing for the web. design philosophy" [ref=e64]:
+            - /url: /NaeesWrites/posts/design-minimalism/
+            - generic [ref=e65]: Mar 10, 2025
+            - generic [ref=e66]: The Case for Minimalist Design
+            - paragraph [ref=e67]: Why less is more when it comes to designing for the web.
+            - generic [ref=e68]: design philosophy
+        - listitem [ref=e69] [cursor=pointer]:
+          - link "Feb 20, 2025 Why I'm Using Static Sites Exploring the benefits of static site generation for personal blogs. technology webdev" [ref=e70]:
+            - /url: /NaeesWrites/posts/why-static-sites/
+            - generic [ref=e71]: Feb 20, 2025
+            - generic [ref=e72]: Why I'm Using Static Sites
+            - paragraph [ref=e73]: Exploring the benefits of static site generation for personal blogs.
+            - generic [ref=e74]: technology webdev
+        - listitem [ref=e75] [cursor=pointer]:
+          - link "Jan 15, 2025 Hello World Welcome to NaeesWrites. This is the first post. introduction meta" [ref=e76]:
+            - /url: /NaeesWrites/posts/hello-world/
+            - generic [ref=e77]: Jan 15, 2025
+            - generic [ref=e78]: Hello World
+            - paragraph [ref=e79]: Welcome to NaeesWrites. This is the first post.
+            - generic [ref=e80]: introduction meta
+  - contentinfo [ref=e81]:
+    - generic [ref=e82]:
+      - navigation "Footer navigation" [ref=e83]:
+        - link "→ home" [ref=e84] [cursor=pointer]:
+          - /url: /NaeesWrites/
+        - link "→ about" [ref=e85] [cursor=pointer]:
+          - /url: /NaeesWrites/about/
+        - link "→ tags" [ref=e86] [cursor=pointer]:
+          - /url: /NaeesWrites/tags/
+        - link "→ github" [ref=e87] [cursor=pointer]:
+          - /url: https://github.com/Naees
+        - link "→ pgp" [ref=e88] [cursor=pointer]:
+          - /url: https://keybase.io/Naees/pgp_keys.asc
+      - generic [ref=e89]: © 2026 naeeswrites · 6 posts · last updated Jun 10, 2025

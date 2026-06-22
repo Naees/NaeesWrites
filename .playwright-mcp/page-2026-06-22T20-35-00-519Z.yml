@@ -1,0 +1,89 @@
+- generic [active] [ref=e1]:
+  - img
+  - img
+  - banner [ref=e2]:
+    - generic [ref=e3]:
+      - link "NaeesWrites home" [ref=e4] [cursor=pointer]:
+        - /url: /NaeesWrites/
+        - img "NaeesWrites" [ref=e5]
+      - navigation "Main navigation" [ref=e6]:
+        - link "home" [ref=e7] [cursor=pointer]:
+          - /url: /NaeesWrites/
+        - link "about" [ref=e8] [cursor=pointer]:
+          - /url: /NaeesWrites/about/
+        - link "tags" [ref=e9] [cursor=pointer]:
+          - /url: /NaeesWrites/tags/
+        - link "RSS feed" [ref=e10] [cursor=pointer]:
+          - /url: /NaeesWrites/rss.xml
+          - img [ref=e11]
+        - link "GitHub" [ref=e13] [cursor=pointer]:
+          - /url: https://github.com/Naees
+          - img [ref=e14]
+        - button "Toggle dark mode" [ref=e16] [cursor=pointer]:
+          - img [ref=e18]
+          - generic [ref=e24]: light
+  - main [ref=e25]:
+    - generic [ref=e27]:
+      - generic [ref=e28]:
+        - heading "NaeesWrites" [level=1] [ref=e29]: NaeesWrites
+        - paragraph [ref=e31]: A collection of thoughts, ideas, and writing.
+      - generic [ref=e32]: ~~~
+      - generic [ref=e34]: $ naees@writes:~/blog$ ls -la posts/█
+      - generic [ref=e35]:
+        - generic [ref=e36]: Search posts
+        - textbox "Search posts" [ref=e37]:
+          - /placeholder: grep -r 'search term' posts/
+      - list "Blog posts" [ref=e38]:
+        - listitem [ref=e39] [cursor=pointer]:
+          - link "Jun 10, 2025 On Reading for Writers How reading differently can make you write better." [ref=e40]:
+            - /url: /NaeesWrites/posts/on-reading/
+            - generic [ref=e41]: Jun 10, 2025
+            - generic [ref=e42]: On Reading for Writers
+            - paragraph [ref=e43]: How reading differently can make you write better.
+        - listitem [ref=e44] [cursor=pointer]:
+          - link "May 20, 2025 Why I Switched to a Static Site The journey from a complex setup to a simple, reliable blog." [ref=e45]:
+            - /url: /NaeesWrites/posts/why-static-sites-2/
+            - generic [ref=e46]: May 20, 2025
+            - generic [ref=e47]: Why I Switched to a Static Site
+            - paragraph [ref=e48]: The journey from a complex setup to a simple, reliable blog.
+        - listitem [ref=e49] [cursor=pointer]:
+          - link "Apr 15, 2025 Threat Modeling for Small Teams A practical approach to threat modeling that doesn't require a dedicated security team." [ref=e50]:
+            - /url: /NaeesWrites/posts/threat-modeling/
+            - generic [ref=e51]: Apr 15, 2025
+            - generic [ref=e52]: Threat Modeling for Small Teams
+            - paragraph [ref=e53]: A practical approach to threat modeling that doesn't require a dedicated security team.
+        - listitem [ref=e54] [cursor=pointer]:
+          - link "Mar 10, 2025 The Case for Minimalist Design Why less is more when it comes to designing for the web." [ref=e55]:
+            - /url: /NaeesWrites/posts/design-minimalism/
+            - generic [ref=e56]: Mar 10, 2025
+            - generic [ref=e57]: The Case for Minimalist Design
+            - paragraph [ref=e58]: Why less is more when it comes to designing for the web.
+        - listitem [ref=e59] [cursor=pointer]:
+          - link "Feb 20, 2025 Why I'm Using Static Sites Exploring the benefits of static site generation for personal blogs." [ref=e60]:
+            - /url: /NaeesWrites/posts/why-static-sites/
+            - generic [ref=e61]: Feb 20, 2025
+            - generic [ref=e62]: Why I'm Using Static Sites
+            - paragraph [ref=e63]: Exploring the benefits of static site generation for personal blogs.
+        - listitem [ref=e64] [cursor=pointer]:
+          - link "Jan 15, 2025 Hello World Welcome to NaeesWrites. This is the first post." [ref=e65]:
+            - /url: /NaeesWrites/posts/hello-world/
+            - generic [ref=e66]: Jan 15, 2025
+            - generic [ref=e67]: Hello World
+            - paragraph [ref=e68]: Welcome to NaeesWrites. This is the first post.
+      - generic [ref=e69]: ~~~
+      - generic [ref=e70]: $ naees@writes:~/blog$ cat README.md | head -20
+      - paragraph [ref=e72]: I'm Naees — a security researcher and writer. This blog is a space for thinking out loud, sharing ideas, and documenting what I learn. Topics span security, technology, design, and philosophy.
+  - contentinfo [ref=e73]:
+    - generic [ref=e74]:
+      - navigation "Footer navigation" [ref=e75]:
+        - link "→ home" [ref=e76] [cursor=pointer]:
+          - /url: /NaeesWrites/
+        - link "→ about" [ref=e77] [cursor=pointer]:
+          - /url: /NaeesWrites/about/
+        - link "→ tags" [ref=e78] [cursor=pointer]:
+          - /url: /NaeesWrites/tags/
+        - link "→ github" [ref=e79] [cursor=pointer]:
+          - /url: https://github.com/Naees
+        - link "→ pgp" [ref=e80] [cursor=pointer]:
+          - /url: https://keybase.io/Naees/pgp_keys.asc
+      - generic [ref=e81]: © 2026 naeeswrites · 6 posts · last updated Jun 10, 2025

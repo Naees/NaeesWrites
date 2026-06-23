@@ -1,0 +1,93 @@
+---
+import { getCollection } from 'astro:content'
+import Layout from '../components/Layout.astro'
+
+const base = import.meta.env.BASE_URL
+const posts = (await getCollection('posts'))
+  .filter(post => !post.data.draft)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+---
+
+<Layout
+  title="Posts — NaeesWrites"
+  description="A collection of thoughts, ideas, and writing by Naees."
+  pathname="/posts/"
+>
+
+<div class="container">
+
+  <!-- Hero -->
+  <div class="hero" style="margin-bottom: 3rem;">
+    <h1 style="margin-top: 0;">NaeesWrites<span class="eye-dot"></span></h1>
+    <p>A collection of thoughts, ideas, and writing.</p>
+  </div>
+
+  <div class="divider" aria-hidden="true">~~~</div>
+
+  <!-- Terminal prompt: ls -->
+  <div style="margin-bottom: 1.5rem;">
+    <div class="prompt typing-line" style="margin-bottom: 0.5rem;">
+      <span class="dollar">$</span> naees@writes:~/blog$ ls -la posts/<span class="cursor-blink">█</span>
+    </div>
+  </div>
+
+  <!-- Search -->
+  <div style="margin-bottom: 2rem;">
+    <label for="search-input" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0);">Search posts</label>
+    <input
+      type="text"
+      id="search-input"
+      aria-label="Search posts"
+      placeholder="grep -r 'search term' posts/"
+      class="search-input"
+    />
+  </div>
+
+  <!-- Post list — plain text, no cards -->
+  <div id="posts-list" role="list" aria-label="Blog posts">
+    {posts.map(post => (
+      <div class="post-item" role="listitem" data-title={post.data.title.toLowerCase()} data-desc={post.data.description.toLowerCase()}>
+        <a href={`${base}posts/${post.id}/`}>
+          <span class="post-date">{post.data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}</span>
+          <div class="post-title">{post.data.title}</div>
+          <p class="post-desc">{post.data.description}</p>
+        </a>
+      </div>
+    ))}
+  </div>
+
+  <div class="divider" aria-hidden="true">~~~</div>
+
+  <!-- Terminal prompt: cat -->
+  <div class="prompt" style="margin-bottom: 1.5rem;">
+    <span class="dollar">$</span> naees@writes:~/blog$ cat README.md | head -20
+  </div>
+
+  <!-- About snippet -->
+  <div style="margin-bottom: 2rem;">
+    <p style="color: var(--text-dim); max-width: 540px;">
+      I'm Naees — a security researcher and writer. This blog is a space for thinking out loud,
+      sharing ideas, and documenting what I learn. Topics span security, technology, design,
+      and philosophy.
+    </p>
+  </div>
+
+</div>
+
+<script>
+  const searchInput = document.getElementById('search-input') as HTMLInputElement
+  const postsList = document.getElementById('posts-list')
+  const items = postsList?.querySelectorAll('.post-item')
+
+  searchInput?.addEventListener('input', (e) => {
+    const query = (e.target as HTMLInputElement).value.toLowerCase()
+    items?.forEach(item => {
+      const title = (item as HTMLElement).dataset.title || ''
+      const desc = (item as HTMLElement).dataset.desc || ''
+      const match = title.includes(query) || desc.includes(query)
+      ;(item as HTMLElement).style.display = match || query === '' ? '' : 'none'
+    })
+  })
+</script>
+
+</Layout>

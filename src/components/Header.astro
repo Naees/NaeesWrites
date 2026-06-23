@@ -18,6 +18,7 @@ const base = import.meta.env.BASE_URL
       <img
         src={`${base}naeesWriteTypographyLogoWithHaku.svg`}
         alt="NaeesWrites"
+        class="site-logo"
         style="height: 36px; width: auto; transition: filter 0.15s ease;"
         onmouseenter="this.style.filter='drop-shadow(0 0 12px #4a9eff33)'"
         onmouseleave="this.style.filter='none'"
@@ -153,6 +154,21 @@ const base = import.meta.env.BASE_URL
     if (e.key === 'Enter' || e.key === ' ') {
       e.preventDefault()
       handleClick()
+    }
+  })
+
+  // Restore icon state after DOM is ready
+  requestAnimationFrame(() => {
+    const theme = localStorage.getItem('theme')
+    const isDark = theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)
+    if (isDark) {
+      sunIcon!.style.display = 'none'
+      moonIcon!.style.display = 'block'
+      label!.textContent = 'dark'
+    } else {
+      sunIcon!.style.display = 'block'
+      moonIcon!.style.display = 'none'
+      label!.textContent = 'light'
     }
   })
 </script>

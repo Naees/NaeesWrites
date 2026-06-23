@@ -3,7 +3,7 @@
  */
 
 /* === Dark (default) === */
-:root {
+html {
   --bg: #0a0a0a;
   --bg-hover: #121212;
   --text: #e6e3d9;
@@ -17,10 +17,11 @@
   --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
   --max-width: 720px;
   --max-width-wide: 960px;
+  --nav-bg: rgba(10, 10, 10, 0.85);
 }
 
 /* === Light === */
-[data-theme='light'] {
+html[data-theme='light'] {
   --bg: #f4f4f4;
   --bg-hover: #eaeaea;
   --text: #1a1a1a;
@@ -30,19 +31,7 @@
   --accent-glow: #2b6be6;
   --accent-dim: #d0e0ff;
   --border: #d0d0d0;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #0a0a0a;
-    --bg-hover: #121212;
-    --text: #e6e3d9;
-    --text-dim: #7a7568;
-    --text-muted: #2a2a2a;
-    --accent: #4a9eff;
-    --accent-glow: #4a9eff;
-    --accent-dim: #1a3a5c;
-  }
+  --nav-bg: rgba(244, 244, 244, 0.85);
 }
 
 * {
@@ -62,7 +51,6 @@ body {
   background-color: var(--bg);
   color: var(--text);
   line-height: 1.6;
-  transition: background-color 0.15s ease, color 0.15s ease;
   position: relative;
   cursor: default;
 }
@@ -554,7 +542,28 @@ hr {
   }
 }
 
-/* === CRT Scanline Overlay (homepage only) === */
+/* === Logo visibility in light mode === */
+html[data-theme='light'] .site-logo {
+  filter: invert(1) brightness(0.3);
+}
+
+/* === Page fade-in === */
+.page-fade-in {
+  animation: fadeIn 0.3s ease forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* === CRT Scanline Overlay (all pages) === */
 .scanlines {
   position: fixed;
   top: 0;
@@ -571,7 +580,7 @@ hr {
   );
 }
 
-/* === Film Grain Overlay (homepage only) === */
+/* === Film Grain Overlay (all pages) === */
 .grain {
   position: fixed;
   top: 0;
@@ -618,7 +627,7 @@ hr {
 }
 
 .nav-scrolled {
-  background-color: rgba(10, 10, 10, 0.85);
+  background-color: var(--nav-bg);
   -webkit-backdrop-filter: blur(14px) saturate(1.1);
   backdrop-filter: blur(14px) saturate(1.1);
   border-bottom: 1px solid var(--text-muted);

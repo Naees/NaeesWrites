@@ -30,12 +30,14 @@ const base = import.meta.env.BASE_URL
   <body>
     <script is:inline>
       (function() {
-        const theme = localStorage.getItem('theme');
-        if (theme) {
-          document.documentElement.setAttribute('data-theme', theme);
-        } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-          document.documentElement.setAttribute('data-theme', 'dark');
-        }
+        try {
+          const theme = localStorage.getItem('theme');
+          if (theme) {
+            document.documentElement.setAttribute('data-theme', theme);
+          } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.documentElement.setAttribute('data-theme', 'dark');
+          }
+        } catch(e) {}
       })();
     </script>
     <img src={`${base}haku.svg`} alt="" class="haku-watermark" aria-hidden="true" />
@@ -43,11 +45,13 @@ const base = import.meta.env.BASE_URL
     <Header currentPage={pathname}>
       <slot name="darkModeToggle" slot="darkModeToggle" />
     </Header>
-    <main style="min-height: 60vh; position: relative; z-index: 1;">
+    <main class="page-fade-in" style="min-height: 60vh; position: relative; z-index: 1;">
       <div style="opacity: 0.92;">
         <slot />
       </div>
     </main>
     <Footer />
+    <div class="scanlines" aria-hidden="true"></div>
+    <div class="grain" aria-hidden="true"></div>
   </body>
 </html>

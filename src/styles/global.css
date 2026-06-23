@@ -15,8 +15,8 @@ html {
   --border: #1a1a1a;
   --font-mono: 'SF Mono', 'Fira Code', 'Fira Mono', Menlo, Consolas, monospace;
   --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
-  --max-width: 720px;
-  --max-width-wide: 960px;
+  --max-width: clamp(640px, 90%, 960px);
+  --max-width-wide: clamp(800px, 94%, 1200px);
   --nav-bg: rgba(10, 10, 10, 0.85);
 }
 

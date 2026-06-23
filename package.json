@@ -11,6 +11,7 @@
     "preview": "astro preview",
     "astro": "astro",
     "auto-tag": "node --import tsx scripts/auto-tag.ts",
+    "sync-discussions": "node --import tsx scripts/sync-discussions.ts",
     "prebuild": "node --import tsx scripts/auto-tag.ts --prebuild"
   },
   "dependencies": {

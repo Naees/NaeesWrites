@@ -14,6 +14,7 @@ import Layout from '../components/Layout.astro'
   <span class="eye-dot" style="display: block; margin-bottom: 1rem;"></span>
 
   <!-- Terminal: whoami -->
+  <section id="whoami">
   <div style="margin-bottom: 1.5rem;">
     <div class="prompt typing-line">
       <span class="dollar">$</span> naees@writes:~$ whoami<span class="cursor-blink">█</span>
@@ -26,6 +27,7 @@ import Layout from '../components/Layout.astro'
   </p>
 
   <!-- Terminal: cat about.txt -->
+  <section id="about">
   <div style="margin-top: 2rem;">
     <div class="prompt typing-line">
       <span class="dollar">$</span> naees@writes:~$ cat about.txt<span class="cursor-blink">█</span>
@@ -41,6 +43,7 @@ When I'm not writing, I'm exploring new technologies, reading, or working on sid
   </div>
 
   <!-- Terminal: ls ~/contact/ -->
+  <section id="contact">
   <div style="margin-top: 2rem;">
     <div class="prompt typing-line">
       <span class="dollar">$</span> naees@writes:~$ ls ~/contact/<span class="cursor-blink">█</span>
@@ -62,7 +65,9 @@ When I'm not writing, I'm exploring new technologies, reading, or working on sid
       <span style="color: var(--accent);">→</span> naees@protonmail.com
     </a>
   </nav>
+  </section>
 
 </div>
+</section>
 
 </Layout>

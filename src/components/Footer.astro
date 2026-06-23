@@ -13,16 +13,109 @@ const base = import.meta.env.BASE_URL
 
 <footer class="footer">
   <div class="container">
-    <nav class="footer-nav" aria-label="Footer navigation">
-      <a href={`${base}`}>→ home</a>
-      <a href={`${base}posts/`}>→ posts</a>
-      <a href={`${base}about/`}>→ about</a>
-      <a href={`${base}tags/`}>→ tags</a>
-      <a href="https://github.com/Naees" target="_blank" rel="noopener noreferrer">→ github</a>
-      <a href="https://keybase.io/Naees/pgp_keys.asc" target="_blank" rel="noopener noreferrer">→ pgp</a>
-    </nav>
+    <div class="footer-columns">
+
+      <div class="footer-column">
+        <h3 class="footer-column-title">Contact</h3>
+        <nav class="footer-nav" aria-label="Contact links">
+          <a href="mailto:naees@protonmail.com">→ naees@protonmail.com</a>
+          <a href="https://github.com/Naees" target="_blank" rel="noopener noreferrer">→ github - naees</a>
+          <a href="https://x.com/NaeesWrites" target="_blank" rel="noopener noreferrer">→ x - @naeeswrites</a>
+          <a href={`${base}publickey.naees@protonmail.com-ee03dcb4e594d725c52883e04bccb80fbfb5ee54.asc`} target="_blank" rel="noopener noreferrer">→ pgp public key</a>
+          <a href="https://signal.me/#eu/1Fkdlvu4vmAqdT-5QwGdGFH1b4uOrLlpyMlK8Fyr5aw_eu6XMJ1PEYOH18jG1nMY" target="_blank" rel="noopener noreferrer">→ signal</a>
+        </nav>
+      </div>
+
+      <div class="footer-column">
+        <h3 class="footer-column-title">Site</h3>
+        <nav class="footer-nav" aria-label="Site navigation">
+          <a href={`${base}#welcome`}>→ home</a>
+          <a href={`${base}#open-source`}>→ open source</a>
+          <a href={`${base}#pages`}>→ pages</a>
+          <a href={`${base}posts/#hero`}>→ posts</a>
+          <a href={`${base}posts/#search`}>→ search</a>
+          <a href={`${base}posts/#posts`}>→ post list</a>
+          <a href={`${base}posts/#about`}>→ about naees</a>
+          <a href={`${base}about/#whoami`}>→ about</a>
+          <a href={`${base}about/#contact`}>→ contact</a>
+          <a href={`${base}tags/#find`}>→ tags</a>
+          <a href={`${base}tags/#filter`}>→ filter</a>
+          <a href={`${base}tags/#posts`}>→ all posts</a>
+        </nav>
+      </div>
+
+    </div>
     <div class="footer-copy">
       &copy; {currentYear} naeeswrites · {postCount} posts · last updated {lastUpdated?.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
     </div>
   </div>
 </footer>
+
+<style>
+  .footer-columns {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 3rem;
+    margin-bottom: 2rem;
+  }
+  .footer-column-title {
+    color: var(--accent);
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .footer-column .footer-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .footer-column .footer-nav a {
+    color: var(--text-dim);
+    text-decoration: none;
+    font-size: 0.85rem;
+    transition: color 0.2s;
+  }
+  .footer-column .footer-nav a:hover {
+    color: var(--accent);
+  }
+  @media (max-width: 640px) {
+    .footer-columns {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+  }
+</style>
+
+<script>
+  document.querySelectorAll('.footer-nav a').forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault()
+      const href = link.getAttribute('href') || ''
+
+      // External link — open in new tab
+      if (href.startsWith('http://') || href.startsWith('https://') || href.startsWith('mailto:')) {
+        window.open(href, '_blank', 'noopener noreferrer')
+        return
+      }
+
+      const { pathname, hash } = new URL(href, window.location.href)
+      const isSamePage = pathname === window.location.pathname
+
+      if (isSamePage && hash) {
+        // Same page — fast scroll to section
+        const target = document.querySelector(hash)
+        if (target) {
+          window.scrollTo({ top: target.offsetTop - 80, behavior: 'smooth' })
+        }
+      } else if (isSamePage) {
+        // Same page, no hash — scroll to top
+        window.scrollTo({ top: 0, behavior: 'smooth' })
+      } else {
+        // Different page — navigate then scroll
+        window.location.href = href
+      }
+    })
+  })
+</script>

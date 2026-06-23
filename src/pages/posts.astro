@@ -17,6 +17,7 @@ const posts = (await getCollection('posts'))
 <div class="container">
 
   <!-- Hero -->
+  <section id="hero">
   <div class="hero" style="margin-bottom: 3rem;">
     <h1 style="margin-top: 0;">NaeesWrites<span class="eye-dot"></span></h1>
     <p>A collection of thoughts, ideas, and writing.</p>
@@ -32,6 +33,7 @@ const posts = (await getCollection('posts'))
   </div>
 
   <!-- Search -->
+  <section id="search">
   <div style="margin-bottom: 2rem;">
     <label for="search-input" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0);">Search posts</label>
     <input
@@ -44,6 +46,7 @@ const posts = (await getCollection('posts'))
   </div>
 
   <!-- Post list — plain text, no cards -->
+  <section id="posts">
   <div id="posts-list" role="list" aria-label="Blog posts">
     {posts.map(post => (
       <div class="post-item" role="listitem" data-title={post.data.title.toLowerCase()} data-desc={post.data.description.toLowerCase()}>
@@ -64,6 +67,7 @@ const posts = (await getCollection('posts'))
   </div>
 
   <!-- About snippet -->
+  <section id="about">
   <div style="margin-bottom: 2rem;">
     <p style="color: var(--text-dim); max-width: 540px;">
       I'm Naees — a security researcher and writer. This blog is a space for thinking out loud,
@@ -71,8 +75,10 @@ const posts = (await getCollection('posts'))
       and philosophy.
     </p>
   </div>
+  </section>
 
 </div>
+</section>
 
 <script>
   const searchInput = document.getElementById('search-input') as HTMLInputElement

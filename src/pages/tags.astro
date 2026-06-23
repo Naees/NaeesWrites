@@ -24,6 +24,7 @@ const tagCounts = getTagCount(posts)
   <span class="eye-dot" style="display: block; margin-bottom: 1rem;"></span>
 
   <!-- Terminal: find -->
+  <section id="find">
   <div style="margin-bottom: 1.5rem;">
     <div class="prompt typing-line">
       <span class="dollar">$</span> naees@writes:~/blog$ find . -name "*.md" -path "*/posts/*" | sort -u<span class="cursor-blink">█</span>
@@ -32,6 +33,7 @@ const tagCounts = getTagCount(posts)
   <div class="divider" aria-hidden="true">~~~</div>
 
   <!-- Tag pills filter bar -->
+  <section id="filter">
   <div class="tag-filter-bar" style="margin-bottom: 3rem;">
     <a
       href={`${base}tags/`}
@@ -54,6 +56,7 @@ const tagCounts = getTagCount(posts)
   <div class="divider" aria-hidden="true">~~~</div>
 
   <!-- Terminal: grep -->
+  <section id="grep">
   <div style="margin-bottom: 1.5rem;">
     <div class="prompt typing-line">
       <span class="dollar">$</span> naees@writes:~/blog$ grep -l "#" posts/*.md | sort -u<span class="cursor-blink">█</span>
@@ -61,6 +64,7 @@ const tagCounts = getTagCount(posts)
   </div>
 
   <!-- Chronological post list -->
+  <section id="posts">
   <div id="posts-list" role="list" aria-label="Blog posts">
     {posts.map(post => (
       <div
@@ -83,8 +87,10 @@ const tagCounts = getTagCount(posts)
       </div>
     ))}
   </div>
+  </section>
 
 </div>
+</section>
 
 <script define:vars={{
   base: base

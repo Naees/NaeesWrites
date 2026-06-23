@@ -445,13 +445,51 @@ export const TAG_KEYWORD_MAP: Record<string, string[]> = {
 
 ---
 
+### Phase 13: Giscus Discussion Sync — ✅ Completed
+
+#### Phase 13.1: Giscus Config Update
+**File:** `src/components/GiscusComments.astro`
+
+**Changes:**
+- Updated `repo-id` to `R_kgDOTAHAGQ`
+- Updated `category` to `Announcements`
+- Updated `category-id` to `DIC_kwDOTAHAGc4C_itP`
+- Updated `data-input-position` to `top`
+
+**Review:** Giscus comments render on post pages with correct repo/category.
+
+#### Phase 13.2: Auto-Create Giscus Discussions for New Posts
+**Files:** `scripts/sync-discussions.ts`, `.github/workflows/sync-discussions.yml`, `package.json`
+
+**Goal:** Automatically create a GitHub Discussion in the Announcements category for each new blog post, so giscus can link comments to the correct discussion.
+
+**`scripts/sync-discussions.ts`:**
+- Reads all posts from `src/content/posts/`
+- Fetches existing discussions from GitHub Discussions API
+- Compares post slugs against discussion titles (format: `https://naees.github.io/NaeesWrites/posts/{slug}/`)
+- Creates a new discussion if one doesn't exist for a post
+- Skips posts that already have a matching discussion
+- Requires `GITHUB_TOKEN` environment variable
+
+**`.github/workflows/sync-discussions.yml`:**
+- Triggers on `push` to `main` when `src/content/posts/` changes
+- Runs `npm run sync-discussions`
+- Uses built-in `GITHUB_TOKEN` with `discussions: write` permission
+
+**`package.json`:**
+- Added `"sync-discussions": "node --import tsx scripts/sync-discussions.ts"` script
+
+**Review:** Push a new post, verify discussion is auto-created in GitHub Discussions.
+
+---
+
 ## Review Process
 
 After each phase of implementation:
 
 1. **Build**: `npm run build` to verify no errors
-2. **Screenshot**: Use Playwright MCP to capture visual test screenshots of all pages (dark and light modes)
-3. **Review**: Compare screenshots against DESIGN.md specifications
+2. **Screenshot**: Use Playwright MCP to examine the current state of the site, and generate new fixes and improvements for it.
+3. **Review**: Compare screenshots against DESIGN.md and PLAN.md pecifications
 4. **Fix**: Adjust any visual inconsistencies before moving to next phase
 5. **Document**: Update DESIGN.md and PLAN.md with any decisions made during implementation
 

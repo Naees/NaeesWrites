@@ -15,6 +15,7 @@ const base = import.meta.env.BASE_URL
       style="font-size: 0.9rem; text-decoration: none;"
       aria-label="NaeesWrites home"
     >
+      <!-- Desktop logos -->
       <img
         src={`${base}typography_and_logo_lightmode.svg`}
         alt="NaeesWrites"
@@ -30,6 +31,19 @@ const base = import.meta.env.BASE_URL
         style="height: 36px; width: auto; display: none; transition: filter 0.15s ease;"
         onmouseenter="this.style.filter='drop-shadow(0 0 12px #4a9eff33)'"
         onmouseleave="this.style.filter='none'"
+      />
+      <!-- Mobile logo -->
+      <img
+        src={`${base}kittenwiz_logolight_mode.svg`}
+        alt="NaeesWrites"
+        class="site-logo site-logo--mobile-light"
+        style="height: auto; max-height: 40px; width: auto; display: none;"
+      />
+      <img
+        src={`${base}kittenwiz_logo_darkmode.svg`}
+        alt="NaeesWrites"
+        class="site-logo site-logo--mobile-dark"
+        style="height: auto; max-height: 40px; width: auto; display: none;"
       />
     </a>
     <nav aria-label="Main navigation" style="display: flex; align-items: center; gap: 1.5rem;">
@@ -100,6 +114,61 @@ const base = import.meta.env.BASE_URL
         <span class="label">dark</span>
       </div>
     </nav>
+    <!-- Hamburger button (mobile only) -->
+    <button
+      class="hamburger"
+      aria-label="Toggle menu"
+      aria-expanded="false"
+    >
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+    </button>
+  </div>
+  <!-- Mobile nav overlay -->
+  <div class="mobile-nav" aria-hidden="true">
+    <div class="mobile-nav-content">
+      <a
+        href={`${base}`}
+        class={`nav-link ${currentPage === '/' ? 'nav-link--active' : ''}`}
+      >
+        home
+      </a>
+      <a
+        href={`${base}posts/`}
+        class={`nav-link ${currentPage === '/posts/' ? 'nav-link--active' : ''}`}
+      >
+        posts
+      </a>
+      <a
+        href={`${base}about/`}
+        class={`nav-link ${currentPage === '/about/' ? 'nav-link--active' : ''}`}
+      >
+        about
+      </a>
+      <a
+        href={`${base}tags/`}
+        class={`nav-link ${currentPage === '/tags/' ? 'nav-link--active' : ''}`}
+      >
+        tags
+      </a>
+      <a
+        href={`${base}rss.xml`}
+        class="nav-link"
+        aria-label="RSS feed"
+      >
+        RSS
+      </a>
+      <a
+        href="https://github.com/Naees"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="nav-link"
+        aria-label="GitHub"
+      >
+        GitHub
+      </a>
+    </div>
   </div>
 </header>
 
@@ -153,7 +222,6 @@ const base = import.meta.env.BASE_URL
     }
   }
 
-  // Defer initial icon update until after Layout's inline script sets data-theme
   requestAnimationFrame(() => updateIcon())
 
   function handleClick() {
@@ -174,9 +242,11 @@ const base = import.meta.env.BASE_URL
 </script>
 
 <script>
-  // Toggle header logo based on data-theme
+  // Toggle header logos based on data-theme
   const lightLogo = document.querySelector('.site-logo--light') as HTMLImageElement | null
   const darkLogo = document.querySelector('.site-logo--dark') as HTMLImageElement | null
+  const mobileLightLogo = document.querySelector('.site-logo--mobile-light') as HTMLImageElement | null
+  const mobileDarkLogo = document.querySelector('.site-logo--mobile-dark') as HTMLImageElement | null
 
   function updateLogo() {
     const theme = localStorage.getItem('theme')
@@ -184,15 +254,66 @@ const base = import.meta.env.BASE_URL
     if (isDark) {
       lightLogo!.style.display = 'none'
       darkLogo!.style.display = 'block'
+      mobileLightLogo!.style.display = 'none'
+      mobileDarkLogo!.style.display = 'block'
     } else {
       lightLogo!.style.display = 'block'
       darkLogo!.style.display = 'none'
+      mobileLightLogo!.style.display = 'block'
+      mobileDarkLogo!.style.display = 'none'
     }
   }
 
   requestAnimationFrame(() => updateLogo())
 
-  // Listen for theme changes
   const observer = new MutationObserver(() => updateLogo())
   observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] })
+</script>
+
+<script>
+  // Hamburger menu toggle
+  const hamburger = document.querySelector('.hamburger') as HTMLElement | null
+  const mobileNav = document.querySelector('.mobile-nav') as HTMLElement | null
+  const mobileNavContent = mobileNav?.querySelector('.mobile-nav-content') as HTMLElement | null
+
+  function toggleMobileMenu() {
+    if (!mobileNav || !mobileNavContent) return
+    const isOpen = mobileNav.getAttribute('aria-hidden') === 'false'
+
+    if (isOpen) {
+      mobileNav.style.transform = 'translateX(100%)'
+      mobileNav.setAttribute('aria-hidden', 'true')
+      hamburger!.setAttribute('aria-expanded', 'false')
+    } else {
+      mobileNav.style.transform = 'translateX(0)'
+      mobileNav.setAttribute('aria-hidden', 'false')
+      hamburger!.setAttribute('aria-expanded', 'true')
+    }
+  }
+
+  hamburger?.addEventListener('click', toggleMobileMenu)
+
+  // Close mobile menu when a link is clicked
+  mobileNavContent?.addEventListener('click', (e) => {
+    const link = (e.target as HTMLElement).closest('a')
+    if (link) {
+      setTimeout(() => {
+        mobileNav!.style.transform = 'translateX(100%)'
+        mobileNav!.setAttribute('aria-hidden', 'true')
+        hamburger!.setAttribute('aria-expanded', 'false')
+      }, 100)
+    }
+  })
+
+  // Close mobile menu when clicking outside
+  document.addEventListener('click', (e) => {
+    if (mobileNav?.getAttribute('aria-hidden') === 'false') {
+      const target = e.target as HTMLElement
+      if (!hamburger?.contains(target) && !mobileNav.contains(target)) {
+        mobileNav.style.transform = 'translateX(100%)'
+        mobileNav.setAttribute('aria-hidden', 'true')
+        hamburger!.setAttribute('aria-expanded', 'false')
+      }
+    }
+  })
 </script>

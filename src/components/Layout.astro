@@ -52,8 +52,8 @@ const base = import.meta.env.BASE_URL
         observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] })
       }
     </script>
-    <img src={`${base}kittenwiz_background_lightmode.svg`} alt="" class="haku-watermark" aria-hidden="true" />
-    <img src={`${base}kittenwiz_background_darkmode.svg`} alt="" class="haku-watermark--glow" aria-hidden="true" style="display: none;" />
+    <img src={`${base}kittenwiz_logo_lightmode.svg`} alt="" class="haku-watermark" aria-hidden="true" />
+    <img src={`${base}kittenwiz_logo_darkmode.svg`} alt="" class="haku-watermark--glow" aria-hidden="true" style="display: none;" />
     <Header currentPage={pathname}>
       <slot name="darkModeToggle" slot="darkModeToggle" />
     </Header>

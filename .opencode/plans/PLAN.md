@@ -559,25 +559,6 @@ export const TAG_KEYWORD_MAP: Record<string, string[]> = {
 
 **Review:** Test resize from desktop → mobile → desktop. Verify only one logo set visible at a time.
 
-### Phase 19: Bold Split Background (Approach B) — ✅ Completed
-
-#### Phase 19.1: Add `--bg-card` CSS Variable
-**File:** `src/styles/global.css`
-
-**Changes:**
-- Dark: `--bg-card: #111111` (content on body `#0a0a0a`)
-- Light: `--bg-card: #ffffff` (content on body `#f4f4f4`)
-- Footer updated to use `var(--bg-card)` instead of hardcoded values
-
-#### Phase 19.2: Accent Border on Main Content
-**Files:** `src/components/Layout.astro`, `src/pages/index.astro`
-
-**Changes:**
-- `<main>` wrapper: `background: var(--bg-card); border: 1px solid var(--accent);`
-- `.open-source-box` and `.page-card` borders updated to `var(--accent)` for consistency
-
-**Review:** Visual check across all pages (homepage, posts, about, tags) in dark/light modes.
-
 ---
 
 ## Review Process

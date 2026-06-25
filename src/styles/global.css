@@ -444,11 +444,6 @@ pre code {
     display: none !important;
   }
 
-  .site-logo--mobile-light,
-  .site-logo--mobile-dark {
-    display: block !important;
-  }
-
   .hamburger {
     display: flex;
   }

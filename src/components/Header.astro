@@ -37,13 +37,13 @@ const base = import.meta.env.BASE_URL
         src={`${base}kittenwiz_logo_lightmode.svg`}
         alt="NaeesWrites"
         class="site-logo site-logo--mobile-light"
-        style="height: auto; max-height: 40px; width: auto; display: block;"
+        style="height: auto; max-height: 40px; width: auto; display: none;"
       />
       <img
         src={`${base}kittenwiz_logo_darkmode.svg`}
         alt="NaeesWrites"
         class="site-logo site-logo--mobile-dark"
-        style="height: auto; max-height: 40px; width: auto; display: block;"
+        style="height: auto; max-height: 40px; width: auto; display: none;"
       />
     </a>
     <nav aria-label="Main navigation" style="display: flex; align-items: center; gap: 1.5rem;">
@@ -251,20 +251,27 @@ const base = import.meta.env.BASE_URL
   function updateLogo() {
     const theme = localStorage.getItem('theme')
     const isDark = theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)
+    const isMobile = window.matchMedia('(max-width: 768px)').matches
     if (isDark) {
       lightLogo!.style.display = 'none'
       darkLogo!.style.display = 'block'
-      mobileLightLogo!.style.display = 'none'
-      mobileDarkLogo!.style.display = 'block'
+      if (isMobile) {
+        mobileLightLogo!.style.display = 'none'
+        mobileDarkLogo!.style.display = 'block'
+      }
     } else {
       lightLogo!.style.display = 'block'
       darkLogo!.style.display = 'none'
-      mobileLightLogo!.style.display = 'block'
-      mobileDarkLogo!.style.display = 'none'
+      if (isMobile) {
+        mobileLightLogo!.style.display = 'block'
+        mobileDarkLogo!.style.display = 'none'
+      }
     }
   }
 
   requestAnimationFrame(() => updateLogo())
+
+  window.addEventListener('resize', () => updateLogo())
 
   const observer = new MutationObserver(() => updateLogo())
   observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] })

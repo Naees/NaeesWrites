@@ -639,11 +639,6 @@ hr {
   }
 }
 
-/* === Logo visibility in light mode === */
-html[data-theme='light'] .site-logo {
-  filter: invert(1) brightness(0.3);
-}
-
 /* === Page fade-in === */
 .page-fade-in {
   animation: fadeIn 0.3s ease forwards;

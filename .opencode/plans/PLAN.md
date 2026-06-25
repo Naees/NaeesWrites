@@ -483,13 +483,91 @@ export const TAG_KEYWORD_MAP: Record<string, string[]> = {
 
 ---
 
+### Phase 14: New Light/Dark Logos & Background Images — ✅ Completed
+
+#### Phase 14.1: Replace Background Images with Logo Versions
+**Files:** `public/kittenwiz_background_lightmode.svg`, `public/kittenwiz_background_darkmode.svg`, `public/kittenwiz_logo_lightmode.svg`, `public/kittenwiz_logo_darkmode.svg`, `public/typography_and_logo_lightmode.svg`, `public/typography_and_logo_darkmode.svg`, `src/components/Header.astro`, `src/components/Layout.astro`
+
+**Changes:**
+- Added new light/dark logo SVGs (`kittenwiz_logo_lightmode.svg`, `kittenwiz_logo_darkmode.svg`)
+- Added new light/dark background SVGs (`kittenwiz_background_lightmode.svg`, `kittenwiz_background_darkmode.svg`)
+- Added new light/dark typography logos (`typography_and_logo_lightmode.svg`, `typography_and_logo_darkmode.svg`)
+- Updated `Header.astro` to reference new typography logo filenames
+- Updated `Layout.astro` to reference new background image filenames
+
+**Review:** Visual check on all pages in dark/light modes.
+
+### Phase 15: Mobile Hamburger Menu & Logo — ✅ Completed
+
+#### Phase 15.1: Mobile Navigation
+**Files:** `src/components/Header.astro`, `src/components/Layout.astro`, `src/styles/global.css`
+
+**Changes:**
+- Added mobile hamburger button (`<button class="hamburger">`) with 3-line icon
+- Added mobile nav overlay (`<div class="mobile-nav">`) with slide-in animation from right
+- Added mobile-specific logo images (`site-logo--mobile-light`, `site-logo--mobile-dark`)
+- Added CSS for mobile nav: `position: fixed`, `top: 0`, `right: 0`, `width: 100%`, `height: 100vh`
+- Added `translateX(100%)` → `translateX(0)` animation for slide-in
+- Added JS: hamburger click toggle, link click close, click-outside close
+- Added `@media (max-width: 768px)` rules: show hamburger, show mobile nav, hide desktop nav
+
+**Review:** Manual mobile testing + Playwright screenshots.
+
+### Phase 16: Watermark Sizing & Mobile Nav Opacity — ✅ Completed
+
+#### Phase 16.1: Watermark Resize
+**File:** `src/styles/global.css`
+
+**Changes:**
+- `.haku-watermark`: width `600px` → `85vmin`, height `auto`, right `-5%`
+- `.haku-watermark--glow`: width `120vmin`, height `120vmin` (was `800px`/`800px`)
+- Watermark opacity: `0.035` (light), `0.025` (dark)
+
+#### Phase 16.2: Mobile Nav Background Opacity
+**File:** `src/styles/global.css`
+
+**Changes:**
+- `.mobile-nav` background: `rgba(10, 10, 10, 0.98)` (dark), `rgba(244, 244, 244, 0.98)` (light)
+
+**Review:** Visual check on watermark size and mobile nav opacity.
+
+### Phase 17: TypeScript Assertion Cleanup — ✅ Completed
+
+#### Phase 17.1: Remove `as HTMLElement` / `as HTMLImageElement` from Inline Scripts
+**Files:** `src/components/Header.astro`, `src/components/Layout.astro`
+
+**Changes:**
+- Removed all `as HTMLElement` and `as HTMLImageElement` type assertions from `is:inline` scripts
+- Astro inline scripts run in browser context — TypeScript types are stripped at build time, causing `ReferenceError` in browser
+- All DOM queries now use plain `document.querySelector()` returning `HTMLElement | null`
+
+**Review:** `npm run build` + verify no console errors.
+
+### Phase 18: Mobile Logo Visibility Bug Fixes — ✅ Completed
+
+#### Phase 18.1: Fix Simultaneous Desktop + Mobile Logo Display
+**Files:** `src/components/Header.astro`, `src/styles/global.css`
+
+**Bug:** Both desktop and mobile logos were visible on desktop (mobile logos had inline `display: none` but CSS `!important` overrode it). Also, mobile logos didn't hide when resizing from mobile to desktop.
+
+**Changes:**
+- `Header.astro`: Mobile logos inline `display: none` (default hidden)
+- `Header.astro`: `updateLogo()` checks `window.matchMedia('(max-width: 768px)').matches` to only toggle mobile logos on mobile
+- `Header.astro`: Always explicitly set mobile logo display on every call (reset on theme change)
+- `Header.astro`: Added `mql.addListener()` for resize detection
+- `global.css`: Removed `.site-logo--mobile-light/dark` CSS rules (JS handles all visibility)
+
+**Review:** Test resize from desktop → mobile → desktop. Verify only one logo set visible at a time.
+
+---
+
 ## Review Process
 
 After each phase of implementation:
 
 1. **Build**: `npm run build` to verify no errors
-2. **Screenshot**: Use Playwright MCP to examine the current state of the site, and generate new fixes and improvements for it.
-3. **Review**: Compare screenshots against DESIGN.md and PLAN.md pecifications
+2. **Screenshot**: Use Playwright MCP to capture visual test screenshots of all pages (dark and light modes)
+3. **Review**: Compare screenshots against DESIGN.md specifications
 4. **Fix**: Adjust any visual inconsistencies before moving to next phase
 5. **Document**: Update DESIGN.md and PLAN.md with any decisions made during implementation
 

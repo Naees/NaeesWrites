@@ -5,6 +5,7 @@
 /* === Dark (default) === */
 html {
   --bg: #0a0a0a;
+  --bg-card: #111111;
   --bg-hover: #121212;
   --text: #e6e3d9;
   --text-dim: #7a7568;
@@ -23,6 +24,7 @@ html {
 /* === Light === */
 html[data-theme='light'] {
   --bg: #f4f4f4;
+  --bg-card: #ffffff;
   --bg-hover: #eaeaea;
   --text: #1a1a1a;
   --text-dim: #5a5a5a;
@@ -468,13 +470,13 @@ pre code {
   padding: 3rem 0;
   margin-top: 4rem;
   border-top: 1px solid var(--text-muted);
-  background: #0a0a0a;
+  background: var(--bg-card);
   position: relative;
   z-index: 1;
 }
 
 [data-theme="light"] .footer {
-  background: #f4f4f4;
+  background: var(--bg-card);
 }
 
 .footer-nav {

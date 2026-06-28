@@ -489,11 +489,12 @@ pre code {
   font-family: var(--font-mono);
   font-size: 0.8rem;
   border: 1px solid var(--border);
-  border-radius: 999px;
+  border-radius: 0;
   text-decoration: none;
   color: var(--text-dim);
   transition: all 0.15s ease;
   cursor: pointer;
+  background: transparent;
 }
 
 .tag-pill:hover {
@@ -504,7 +505,18 @@ pre code {
 .tag-pill--active {
   color: var(--accent);
   border-color: var(--accent);
-  animation: pulseGlow 2s ease-in-out infinite;
+  background: var(--accent-dim);
+}
+
+.tag-pill .tag-count {
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  transition: color 0.15s ease;
+}
+
+.tag-pill--active .tag-count {
+  color: var(--accent);
+  opacity: 0.7;
 }
 
 .tag-filter-bar {

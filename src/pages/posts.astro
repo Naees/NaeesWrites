@@ -140,9 +140,7 @@ const tagCounts = getTagCount(posts)
     const tag = pill.dataset.tag || 'all'
     activeTag = tag
 
-    const url = tag === 'all'
-      ? base + 'posts/'
-      : base + 'posts/?tag=' + encodeURIComponent(tag)
+    const url = pill.getAttribute('href') || ''
     history.pushState({ tag }, '', url)
 
     pills?.forEach(p => p.classList.remove('tag-pill--active'))
@@ -173,6 +171,7 @@ const tagCounts = getTagCount(posts)
       const pillTag = pill.dataset.tag || ''
       pill.classList.toggle('tag-pill--active', pillTag === tagParam)
     })
+    filterPosts()
   }
 </script>
 

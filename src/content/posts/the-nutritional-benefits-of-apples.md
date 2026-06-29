@@ -2,7 +2,7 @@
 title: "The Nutritional Benefits of Apples"
 description: "A closer look at why apples deserve their reputation as one of nature's most complete foods."
 date: 2026-06-29
-tags: []
+tags: ["health", "wellness", "food" ]
 draft: false
 ---
 

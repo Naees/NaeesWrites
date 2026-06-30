@@ -1,5 +1,6 @@
 ---
 import Layout from '../components/Layout.astro'
+import Divider from '../components/Divider.astro'
 const base = import.meta.env.BASE_URL
 ---
 
@@ -24,7 +25,7 @@ const base = import.meta.env.BASE_URL
           <span class="dollar">$</span> naees@writes:~$ whoami<span class="cursor-blink">█</span>
         </div>
       </div>
-      <div class="divider" aria-hidden="true">~~~</div>
+      <Divider />
 
       <p class="about-bio-label">naees — security researcher &amp; writer</p>
 
@@ -43,7 +44,7 @@ When I'm not writing, I'm exploring new technologies, reading, or working on sid
           <span class="dollar">$</span> naees@writes:~$ cat ~/expertise.txt<span class="cursor-blink">█</span>
         </div>
       </div>
-      <div class="divider" aria-hidden="true">~~~</div>
+      <Divider />
 
       <div class="about-expertise-grid">
         <a class="about-expertise-pill" href={`${base}posts/?tag=web-security`}>Web Security</a>
@@ -63,7 +64,7 @@ When I'm not writing, I'm exploring new technologies, reading, or working on sid
 
   </section>
 
-  <div class="divider" aria-hidden="true">~~~</div>
+  <Divider />
 
   <!-- Research Highlights -->
   <section id="highlights">
@@ -72,7 +73,7 @@ When I'm not writing, I'm exploring new technologies, reading, or working on sid
         <span class="dollar">$</span> naees@writes:~$ ls ~/research/<span class="cursor-blink">█</span>
       </div>
     </div>
-    <div class="divider" aria-hidden="true">~~~</div>
+    <Divider />
 
     <div class="about-highlights-grid">
       <a href={`${base}posts/minimalism-security/`} class="about-highlight-card">
@@ -90,7 +91,7 @@ When I'm not writing, I'm exploring new technologies, reading, or working on sid
     </div>
   </section>
 
-  <div class="divider" aria-hidden="true">~~~</div>
+  <Divider />
 
   <!-- PGP Public Key -->
   <section id="pgp">
@@ -99,7 +100,7 @@ When I'm not writing, I'm exploring new technologies, reading, or working on sid
         <span class="dollar">$</span> naees@writes:~$ gpg --show-keys publickey.naees.asc<span class="cursor-blink">█</span>
       </div>
     </div>
-    <div class="divider" aria-hidden="true">~~~</div>
+    <Divider />
 
     <div class="output-block about-pgp-block" style="border-left-color: var(--accent);">
 pub   ed25519 2026-06-21 [SC]
@@ -115,7 +116,7 @@ sub   cv25519 2026-06-21 [E]
     </div>
   </section>
 
-  <div class="divider" aria-hidden="true">~~~</div>
+  <Divider />
 
   <!-- Contact -->
   <section id="contact">
@@ -124,7 +125,7 @@ sub   cv25519 2026-06-21 [E]
         <span class="dollar">$</span> naees@writes:~$ ls ~/contact/<span class="cursor-blink">█</span>
       </div>
     </div>
-    <div class="divider" aria-hidden="true">~~~</div>
+    <Divider />
 
     <nav class="about-contact-grid" aria-label="Contact links">
       <a href="https://github.com/Naees" target="_blank" rel="noopener noreferrer" class="about-contact-link">
@@ -148,7 +149,7 @@ sub   cv25519 2026-06-21 [E]
     </nav>
   </section>
 
-  <div class="divider" aria-hidden="true">~~~</div>
+  <Divider />
 
   <!-- Co-Author: Haku -->
   <section id="haku" class="about-haku-section">
@@ -157,23 +158,24 @@ sub   cv25519 2026-06-21 [E]
         <span class="dollar">$</span> naees@writes:~$ cat ~/co-author.md<span class="cursor-blink">█</span>
       </div>
     </div>
-    <div class="divider" aria-hidden="true">~~~</div>
+    <Divider />
 
-    <div class="about-haku">
-      <div class="about-haku-header">
-        <img
-          src={`${base}assets/haku.jpg`}
-          alt="Haku, the good boy"
-          class="about-haku-photo"
-        />
-        <div>
-          <div class="about-haku-name">haku — co-author</div>
-          <div class="about-haku-title">senior security analyst (canine division)</div>
+    <div class="about-haku-split">
+      <div class="about-haku-left">
+        <div class="about-haku-header">
+          <img
+            src={`${base}assets/haku.jpg`}
+            alt="Haku, the good boy"
+            class="about-haku-photo"
+          />
+          <div>
+            <div class="about-haku-name">haku — co-author</div>
+            <div class="about-haku-title">senior security analyst (canine division)</div>
+          </div>
         </div>
-      </div>
 
-      <div class="about-haku-bio">
-        <div class="output-block about-haku-text" style="border-left-color: var(--text-dim);">
+        <div class="about-haku-bio">
+          <div class="output-block about-haku-text" style="border-left-color: var(--text-dim);">
 Clearance level:  ████████░░ 80%
 Badge of honor:    Good boy
 
@@ -193,7 +195,16 @@ voice that says 'sit.' That is the only exploit I need."
 — haku, senior analyst
 
 Status:  [●] on duty (sleeping)
+          </div>
         </div>
+      </div>
+
+      <div class="about-haku-img">
+        <img
+          src={`${base}assets/raincoat_haku.jpg`}
+          alt="Haku in a raincoat"
+          class="about-haku-img-photo"
+        />
       </div>
     </div>
   </section>

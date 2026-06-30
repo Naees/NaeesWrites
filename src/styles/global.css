@@ -208,12 +208,9 @@ pre code {
 
 /* === Divider === */
 .divider {
-  font-family: var(--font-mono);
-  font-size: 0.875rem;
-  color: var(--text-muted);
-  margin: 2.5rem 0;
-  user-select: none;
-  cursor: default;
+  border: none;
+  border-top: 2px solid var(--text-dim);
+  margin: 3rem 0;
 }
 
 /* === Block output === */
@@ -1149,6 +1146,34 @@ hr {
   white-space: pre-wrap;
 }
 
+/* === About page: Haku co-author split layout === */
+.about-haku-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: center;
+}
+
+.about-haku-left {
+  max-width: 700px;
+}
+
+.about-haku-img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.about-haku-img-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
 /* === About page: responsive === */
 @media (max-width: 768px) {
   .about-split {
@@ -1173,6 +1198,15 @@ hr {
   .about-haku-photo {
     width: 80px;
     height: 80px;
+  }
+
+  .about-haku-split {
+    grid-template-columns: 1fr;
+  }
+
+  .about-haku-img {
+    max-width: 300px;
+    margin: 0 auto;
   }
 }
 

@@ -1,73 +1,203 @@
 ---
 import Layout from '../components/Layout.astro'
+const base = import.meta.env.BASE_URL
 ---
 
 <Layout
   title="About — NaeesWrites"
-  description="About Naees, the author behind NaeesWrites."
+  description="About Naees, the author behind NaeesWrites — security researcher, writer, and co-author of a very good dog."
   pathname="/about/"
 >
 
-<div class="container">
+<div class="container" style="--about-base: '${base}';">
 
   <!-- Eye-dot signature element -->
-  <span class="eye-dot" style="display: block; margin-bottom: 1rem;"></span>
+  <span class="eye-dot" style="display: block; margin-bottom: 1.5rem;"></span>
 
-  <!-- Terminal: whoami -->
-  <section id="whoami">
-  <div style="margin-bottom: 1.5rem;">
-    <div class="prompt typing-line">
-      <span class="dollar">$</span> naees@writes:~$ whoami<span class="cursor-blink">█</span>
-    </div>
-  </div>
-  <div class="divider" aria-hidden="true">~~~</div>
+  <!-- Split: Bio + Expertise -->
+  <section id="bio" class="about-split">
 
-  <p style="margin-bottom: 2rem;">
-    naees — security researcher &amp; writer
-  </p>
+    <div class="about-bio">
+      <!-- Terminal: whoami -->
+      <div style="margin-bottom: 1.5rem;">
+        <div class="prompt typing-line">
+          <span class="dollar">$</span> naees@writes:~$ whoami<span class="cursor-blink">█</span>
+        </div>
+      </div>
+      <div class="divider" aria-hidden="true">~~~</div>
 
-  <!-- Terminal: cat about.txt -->
-  <section id="about">
-  <div style="margin-top: 2rem;">
-    <div class="prompt typing-line">
-      <span class="dollar">$</span> naees@writes:~$ cat about.txt<span class="cursor-blink">█</span>
-    </div>
-  </div>
-  <div class="divider" aria-hidden="true">~~~</div>
+      <p class="about-bio-label">naees — security researcher &amp; writer</p>
 
-  <div class="output-block" style="border-left-color: var(--text-dim);">
+      <div class="output-block about-bio-text" style="border-left-color: var(--text-dim);">
 I write about security, technology, and the things I find interesting along the way.
 This blog is a space for thinking out loud, sharing ideas, and documenting what I learn.
 
 When I'm not writing, I'm exploring new technologies, reading, or working on side projects.
-  </div>
-
-  <!-- Terminal: ls ~/contact/ -->
-  <section id="contact">
-  <div style="margin-top: 2rem;">
-    <div class="prompt typing-line">
-      <span class="dollar">$</span> naees@writes:~$ ls ~/contact/<span class="cursor-blink">█</span>
+      </div>
     </div>
-  </div>
+
+    <div class="about-expertise">
+      <!-- Terminal: cat expertise -->
+      <div style="margin-bottom: 1.5rem;">
+        <div class="prompt typing-line">
+          <span class="dollar">$</span> naees@writes:~$ cat ~/expertise.txt<span class="cursor-blink">█</span>
+        </div>
+      </div>
+      <div class="divider" aria-hidden="true">~~~</div>
+
+      <div class="about-expertise-grid">
+        <a class="about-expertise-pill" href={`${base}posts/?tag=web-security`}>Web Security</a>
+        <a class="about-expertise-pill" href={`${base}posts/?tag=network-attacks`}>Network Attacks</a>
+        <a class="about-expertise-pill" href={`${base}posts/?tag=privilege-escalation`}>Privilege Escalation</a>
+        <a class="about-expertise-pill" href={`${base}posts/?tag=cryptography`}>Cryptography</a>
+        <a class="about-expertise-pill" href={`${base}posts/?tag=cloud-security`}>Cloud Security</a>
+        <a class="about-expertise-pill" href={`${base}posts/?tag=python`}>Python</a>
+        <a class="about-expertise-pill" href={`${base}posts/?tag=exploit-development`}>Exploit Development</a>
+        <a class="about-expertise-pill" href={`${base}posts/?tag=security-automation`}>Security Automation</a>
+        <a class="about-expertise-pill" href={`${base}posts/?tag=linux`}>Linux Administration</a>
+        <a class="about-expertise-pill" href={`${base}posts/?tag=incident-response`}>Incident Response</a>
+        <a class="about-expertise-pill" href={`${base}posts/?tag=security`}>Security</a>
+        <a class="about-expertise-pill" href={`${base}posts/?tag=philosophy`}>Philosophy</a>
+      </div>
+    </div>
+
+  </section>
+
   <div class="divider" aria-hidden="true">~~~</div>
 
-  <nav style="padding-left: 1rem; margin-bottom: 2rem; display: flex; gap: 1.5rem; flex-wrap: wrap; font-family: var(--font-mono); font-size: 0.85rem;">
-    <a href="https://github.com/Naees" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: var(--text-dim);">
-      <span style="color: var(--accent);">→</span> github
-    </a>
-    <a href="https://linkedin.com/in/Naees" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: var(--text-dim);">
-      <span style="color: var(--accent);">→</span> linkedin
-    </a>
-    <a href="https://twitter.com/Naees" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: var(--text-dim);">
-      <span style="color: var(--accent);">→</span> x
-    </a>
-    <a href="mailto:naees@protonmail.com" style="text-decoration: none; color: var(--text-dim);">
-      <span style="color: var(--accent);">→</span> naees@protonmail.com
-    </a>
-  </nav>
+  <!-- Research Highlights -->
+  <section id="highlights">
+    <div style="margin-bottom: 1.5rem;">
+      <div class="prompt typing-line">
+        <span class="dollar">$</span> naees@writes:~$ ls ~/research/<span class="cursor-blink">█</span>
+      </div>
+    </div>
+    <div class="divider" aria-hidden="true">~~~</div>
+
+    <div class="about-highlights-grid">
+      <a href={`${base}posts/minimalism-security/`} class="about-highlight-card">
+        <div class="about-highlight-title">On Minimalism in Security Research</div>
+        <div class="about-highlight-desc">Why less is more when it comes to understanding attack surfaces.</div>
+      </a>
+      <a href={`${base}posts/threat-modeling/`} class="about-highlight-card">
+        <div class="about-highlight-title">Threat Modeling for Small Teams</div>
+        <div class="about-highlight-desc">A practical approach to threat modeling that doesn't require a dedicated security team.</div>
+      </a>
+      <a href={`${base}posts/ethics-privacy/`} class="about-highlight-card">
+        <div class="about-highlight-title">The Ethics of Privacy in the Digital Age</div>
+        <div class="about-highlight-desc">Exploring the tension between security and privacy in modern systems.</div>
+      </a>
+    </div>
+  </section>
+
+  <div class="divider" aria-hidden="true">~~~</div>
+
+  <!-- PGP Public Key -->
+  <section id="pgp">
+    <div style="margin-bottom: 1.5rem;">
+      <div class="prompt typing-line">
+        <span class="dollar">$</span> naees@writes:~$ gpg --show-keys publickey.naees.asc<span class="cursor-blink">█</span>
+      </div>
+    </div>
+    <div class="divider" aria-hidden="true">~~~</div>
+
+    <div class="output-block about-pgp-block" style="border-left-color: var(--accent);">
+pub   ed25519 2026-06-21 [SC]
+      EE03 DCB4 E594 D725 C528  83E0 4BCC B80F BFB5 EE54
+uid           naees@protonmail.com &lt;naees@protonmail.com&gt;
+sub   cv25519 2026-06-21 [E]
+    </div>
+
+    <div style="margin-top: 1rem; display: flex; gap: 1rem; flex-wrap: wrap;">
+      <a href={`${base}keys/publickey.naees.asc`} class="btn" download>
+        → download .asc
+      </a>
+    </div>
+  </section>
+
+  <div class="divider" aria-hidden="true">~~~</div>
+
+  <!-- Contact -->
+  <section id="contact">
+    <div style="margin-bottom: 1.5rem;">
+      <div class="prompt typing-line">
+        <span class="dollar">$</span> naees@writes:~$ ls ~/contact/<span class="cursor-blink">█</span>
+      </div>
+    </div>
+    <div class="divider" aria-hidden="true">~~~</div>
+
+    <nav class="about-contact-grid" aria-label="Contact links">
+      <a href="https://github.com/Naees" target="_blank" rel="noopener noreferrer" class="about-contact-link">
+        <span class="about-contact-arrow">→</span> github
+      </a>
+      <a href="https://linkedin.com/in/Naees" target="_blank" rel="noopener noreferrer" class="about-contact-link">
+        <span class="about-contact-arrow">→</span> linkedin
+      </a>
+      <a href="https://twitter.com/Naees" target="_blank" rel="noopener noreferrer" class="about-contact-link">
+        <span class="about-contact-arrow">→</span> x
+      </a>
+      <a href="mailto:naees@protonmail.com" class="about-contact-link">
+        <span class="about-contact-arrow">→</span> naees@protonmail.com
+      </a>
+      <a href={`${base}keys/publickey.naees.asc`} target="_blank" rel="noopener noreferrer" class="about-contact-link">
+        <span class="about-contact-arrow">→</span> pgp key
+      </a>
+      <a href="https://signal.me/#eu/1Fkdlvu4vmAqdT-5QwGdGFH1b4uOrLlpyMlK8Fyr5aw_eu6XMJ1PEYOH18jG1nMY" target="_blank" rel="noopener noreferrer" class="about-contact-link">
+        <span class="about-contact-arrow">→</span> signal
+      </a>
+    </nav>
+  </section>
+
+  <div class="divider" aria-hidden="true">~~~</div>
+
+  <!-- Co-Author: Haku -->
+  <section id="haku" class="about-haku-section">
+    <div style="margin-bottom: 1.5rem;">
+      <div class="prompt typing-line">
+        <span class="dollar">$</span> naees@writes:~$ cat ~/co-author.md<span class="cursor-blink">█</span>
+      </div>
+    </div>
+    <div class="divider" aria-hidden="true">~~~</div>
+
+    <div class="about-haku">
+      <div class="about-haku-header">
+        <img
+          src={`${base}assets/haku.jpg`}
+          alt="Haku, the good boy"
+          class="about-haku-photo"
+        />
+        <div>
+          <div class="about-haku-name">haku — co-author</div>
+          <div class="about-haku-title">senior security analyst (canine division)</div>
+        </div>
+      </div>
+
+      <div class="about-haku-bio">
+        <div class="output-block about-haku-text" style="border-left-color: var(--text-dim);">
+Clearance level:  ████████░░ 80%
+Badge of honor:    Good boy
+
+Haku doesn't write the posts — but they do provide excellent
+incident response coverage. Their primary responsibilities include
+sniffing out security vulnerabilities (literally), performing
+physical penetration testing on the front door, and conducting
+thorough code reviews by sitting on the keyboard.
+
+Notable achievements:
+- Successfully defended the couch against 3 cat intrusions
+- Discovered a critical vulnerability in the treat-dispensing API
+- Authored 0 blog posts, but has given excellent feedback
+
+"I don't understand the terminal. I understand the tone of
+voice that says 'sit.' That is the only exploit I need."
+— haku, senior analyst
+
+Status:  [●] on duty (sleeping)
+        </div>
+      </div>
+    </div>
   </section>
 
 </div>
-</section>
 
 </Layout>

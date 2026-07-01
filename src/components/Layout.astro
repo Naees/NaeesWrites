@@ -40,20 +40,9 @@ const base = import.meta.env.BASE_URL
         } catch(e) {}
       })();
 
-      // Toggle background images based on theme
-      const lightBg = document.querySelector('.haku-watermark')
-      const darkBg = document.querySelector('.haku-watermark--glow')
-      if (lightBg && darkBg) {
-        const observer = new MutationObserver(() => {
-          const isDark = document.documentElement.getAttribute('data-theme') === 'dark'
-          lightBg.style.display = isDark ? 'none' : 'block'
-          darkBg.style.display = isDark ? 'block' : 'none'
-        })
-        observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] })
-      }
     </script>
     <img src={`${base}assets/kittenwiz_logo_lightmode.svg`} alt="" class="haku-watermark" aria-hidden="true" />
-    <img src={`${base}assets/kittenwiz_logo_darkmode.svg`} alt="" class="haku-watermark--glow" aria-hidden="true" style="display: none;" />
+    <img src={`${base}assets/kittenwiz_logo_darkmode.svg`} alt="" class="haku-watermark--glow" aria-hidden="true" />
     <Header currentPage={pathname}>
       <slot name="darkModeToggle" slot="darkModeToggle" />
     </Header>

@@ -6,7 +6,9 @@ export function formatDate(date: Date): string {
   })
 }
 
-export function getTagCount(posts: Array<{ data: { tags: string[] } }>): Map<string, number> {
+import type { CollectionEntry } from 'astro:content'
+
+export function getTagCount(posts: CollectionEntry<'posts'>[]): Map<string, number> {
   const tagCount = new Map<string, number>()
   for (const post of posts) {
     const tags = post.data.tags || []
@@ -17,7 +19,7 @@ export function getTagCount(posts: Array<{ data: { tags: string[] } }>): Map<str
   return tagCount
 }
 
-export function getAllTags(posts: Array<{ data: { tags: string[] } }>): string[] {
+export function getAllTags(posts: CollectionEntry<'posts'>[]): string[] {
   const tags = new Set<string>()
   for (const post of posts) {
     const postTags = post.data.tags || []

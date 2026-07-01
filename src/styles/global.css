@@ -89,6 +89,15 @@ body {
   pointer-events: none;
   z-index: 0;
   filter: blur(20px);
+  display: none;
+}
+
+[data-theme="dark"] .haku-watermark {
+  display: none;
+}
+
+[data-theme="dark"] .haku-watermark--glow {
+  display: block;
 }
 
 /* === Links === */
@@ -632,6 +641,22 @@ pre code {
 .mobile-nav-content .nav-link {
   font-size: 1.1rem;
   padding: 0.5rem 0;
+}
+
+.site-logo--light {
+  display: block;
+}
+
+.site-logo--dark {
+  display: none;
+}
+
+[data-theme="dark"] .site-logo--light {
+  display: none;
+}
+
+[data-theme="dark"] .site-logo--dark {
+  display: block;
 }
 
 @media (max-width: 768px) {

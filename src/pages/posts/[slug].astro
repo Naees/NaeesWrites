@@ -11,12 +11,12 @@ export async function getStaticPaths() {
   const posts = await getCollection('posts')
   return posts.map(post => ({
     params: { slug: post.id },
+    props: { postEntry: post },
   }))
 }
 
 const { slug } = Astro.params
-const allPosts = await getCollection('posts')
-const postEntry = allPosts.find(p => p.id === slug)
+const postEntry = Astro.props.postEntry
 const post = postEntry?.data
 const body = postEntry?.body
 

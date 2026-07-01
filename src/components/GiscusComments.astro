@@ -44,17 +44,14 @@ const categoryId = 'DIC_kwDOTAHAGc4C_itP'
   }
   loadGiscus()
 
-  const toggle = document.querySelector('.dark-mode-toggle')
-  if (toggle) {
-    toggle.addEventListener('click', () => {
-      setTimeout(loadGiscus, 100)
-    })
+  function loadGiscusWithTheme() {
+    setTimeout(loadGiscus, 100)
   }
 
   const observer = new MutationObserver((mutations) => {
     for (const mutation of mutations) {
       if (mutation.attributeName === 'data-theme') {
-        setTimeout(loadGiscus, 100)
+        loadGiscusWithTheme()
       }
     }
   })
